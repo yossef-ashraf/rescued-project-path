@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { cn } from '@/shared/utils/utils.js';
 import { Edit2, Eye, Copy, Check } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function EquationBlock({
     equation = '',

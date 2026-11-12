@@ -1,3 +1,5 @@
+// @ts-nocheck
+// Carried over unchanged from the original app.
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 
 import constellationFieldSource from "./sources/constellation-field.js";

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Printer, X, FileText, Calendar, Globe } from 'lucide-react';
 
 export default function ComprehensivePdfModal({

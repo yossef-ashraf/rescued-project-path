@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { UserPlus, Key, Trash2, CheckCircle, XCircle, ShieldCheck, UserCheck, Shield, AlertTriangle, RefreshCw, LogOut } from 'lucide-react';
 import { useSearchParams, useRouter } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { announceMatteAlert } from '@/components/ui/MatteAlert';
 import DashboardHubPills from '@/components/layout/DashboardHubPills';
 import UsersTab from '@/features/settings/components/UsersTab';

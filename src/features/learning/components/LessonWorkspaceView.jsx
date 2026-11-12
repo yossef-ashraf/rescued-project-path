@@ -49,7 +49,7 @@ import {
     addLessonResource,
     deleteLessonResource
 } from '../api/lessons.api.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 import { PageDashboardSkeleton } from '@/components/ui/Skeleton';
 import { Button } from '@/components/ui/button';

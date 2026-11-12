@@ -7,7 +7,7 @@ import Link from '@/shared/next-compat/link';
 import { cn } from '@/shared/utils/utils.js';
 import { GraduationCap, BookOpen, Clock, User, ChevronLeft, ChevronRight, Edit3, ExternalLink } from 'lucide-react';
 import { ShareButton } from '@/features/sharing';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function CourseCard({
     course,

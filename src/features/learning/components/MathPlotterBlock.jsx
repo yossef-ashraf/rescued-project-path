@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Sigma, ExternalLink, RefreshCw, Layers, FileText, Check } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function MathPlotterBlock({
     initialEquation = 'x^2',

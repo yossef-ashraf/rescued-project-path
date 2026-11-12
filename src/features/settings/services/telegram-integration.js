@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { Setting, User, TodoItem, Task, Notification } from '@/shared/models/index.js';
 import { Op } from '@/shared/database/orm.js';
 import { getEgyptDateStr, getEgyptTimeStr } from '@/shared/utils/timezone.js';
@@ -70,12 +71,23 @@ export function getProductionBaseUrl(origin = '') {
     }
     const baseUrl = getServerConfig().baseUrl;
     if (baseUrl && baseUrl.startsWith('https://') && !baseUrl.includes('localhost')) {
-        if (baseUrl.includes('dash-codex-two.vercel.app')) {
-            return 'https://yossef-ashraf.vercel.app';
-        }
         return baseUrl.replace(/\/+$/, '');
     }
-    return 'https://yossef-ashraf.vercel.app';
+    return '';
+}
+
+/** Secret Telegram echoes in X-Telegram-Bot-Api-Secret-Token on every webhook call. */
+export function telegramWebhookSecret(token) {
+    return crypto.createHmac('sha256', String(token)).update('orbit-telegram-webhook').digest('hex').slice(0, 64);
+}
+
+export async function verifyTelegramWebhookRequest(req) {
+    const { token } = await getTelegramConfig(true);
+    if (!token) return false;
+    const provided = req.headers?.get?.('x-telegram-bot-api-secret-token') || '';
+    const expected = telegramWebhookSecret(token);
+    if (!provided || provided.length !== expected.length) return false;
+    return crypto.timingSafeEqual(Buffer.from(provided), Buffer.from(expected));
 }
 
 export async function ensureTelegramWebhook(customUrl = '') {
@@ -85,13 +97,14 @@ export async function ensureTelegramWebhook(customUrl = '') {
     }
 
     const targetBase = customUrl || getProductionBaseUrl();
-    const webhookUrl = `${targetBase}/api/telegram/webhook`;
+    const webhookUrl = `${targetBase}/api/public/telegram/webhook`;
+    const secretToken = telegramWebhookSecret(token);
 
     try {
         const infoRes = await fetch(`https://api.telegram.org/bot${token}/getWebhookInfo`);
         const info = await infoRes.json();
 
-        if (info.ok && info.result?.url === webhookUrl) {
+        if (info.ok && info.result?.url === webhookUrl && !customUrl) {
             return { ok: true, registered: false, url: webhookUrl, info: info.result };
         }
 
@@ -100,6 +113,7 @@ export async function ensureTelegramWebhook(customUrl = '') {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 url: webhookUrl,
+                secret_token: secretToken,
                 allowed_updates: ['message', 'callback_query']
             })
         });

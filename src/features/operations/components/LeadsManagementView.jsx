@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useCallback } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { ProjectDetailView } from '@/features/operations/components/ProjectDetailView';
 import ConfirmDeleteModal from '@/components/ui/ConfirmDeleteModal';
 import {

@@ -1,0 +1,17 @@
+import { createFileRoute } from "@tanstack/react-router";
+import Page from "@/features/learning/pages/courses/[id]/lessons/new/page.jsx";
+import { NextPage } from "@/shared/next-compat/page";
+
+export const Route = createFileRoute("/courses/$id/lessons/new")({
+  head: () => ({
+    meta: [
+      { title: "New Lesson — Orbit" },
+      { name: "description", content: "Create a lesson for this course." },
+      { property: "og:title", content: "New Lesson — Orbit" },
+      { property: "og:description", content: "Create a lesson for this course." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: () => <NextPage component={Page} />,
+});

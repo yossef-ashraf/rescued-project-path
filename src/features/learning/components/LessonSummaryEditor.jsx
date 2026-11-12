@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { FileText, Edit3, Eye, Sparkles, BookOpen, Clock } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 
 function cleanMarkdownLine(line) {

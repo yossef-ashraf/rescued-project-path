@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Share2 } from 'lucide-react';
 import { cn } from '@/shared/utils/utils.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import ShareDialog from './ShareDialog.jsx';
 
 export function ShareButton({

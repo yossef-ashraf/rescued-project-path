@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Lock, StickyNote } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function LessonNotesEditor({ notes, onChange }) {
     const { t, lang } = useApp();

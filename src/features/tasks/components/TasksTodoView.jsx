@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Loader2, X, Plus, Check, Calendar, Clock, Repeat, Layers, Search } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { announceMatteAlert } from '@/components/ui/MatteAlert';
 import { TodoCard } from '@/features/tasks/components/ToDoCard';
 import ConfirmDeleteModal from '@/components/ui/ConfirmDeleteModal';

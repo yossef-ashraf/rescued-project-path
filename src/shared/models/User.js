@@ -21,18 +21,6 @@ export const User = sequelize.define('User', {
         allowNull: false,
         unique: true
     },
-    password_hash: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    password_salt: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    role: {
-        type: DataTypes.STRING,
-        defaultValue: 'user'
-    },
     status: {
         type: DataTypes.STRING,
         defaultValue: 'active'
@@ -52,9 +40,8 @@ export const User = sequelize.define('User', {
     telegram_chat_id: {
         type: DataTypes.STRING
     },
-    token_version: {
-        type: DataTypes.INTEGER,
-        defaultValue: 1
+    auth_user_id: {
+        type: DataTypes.UUID
     },
     created_at: {
         type: DataTypes.DATE,
@@ -65,7 +52,7 @@ export const User = sequelize.define('User', {
         defaultValue: DataTypes.NOW
     }
 }, {
-    tableName: 'users',
+    tableName: 'profiles',
     timestamps: false
 });
 

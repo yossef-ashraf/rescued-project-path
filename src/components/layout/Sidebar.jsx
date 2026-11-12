@@ -6,7 +6,7 @@ import Image from '@/shared/next-compat/image';
 import { usePathname, useRouter } from '@/shared/next-compat/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronLeft, ChevronRight, Sun, Moon, Search } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import NotificationCenter from '@/features/notifications/components/NotificationCenter';
 import MobileBottomNav from '@/components/layout/MobileBottomNavigation';
 import MobileQuickActions from '@/components/layout/MobileQuickActions';
@@ -510,7 +510,7 @@ export default function Sidebar({
                             <Link href="/" className="flex items-center gap-2.5 min-w-0">
                                 <div className="relative w-7 h-7 shrink-0 flex items-center justify-center">
                                     <Image
-                                        src="/logos/image.png"
+                                        src="/logo-mark.svg"
                                         alt="Orbit"
                                         width={28}
                                         height={28}
@@ -532,7 +532,7 @@ export default function Sidebar({
                         {compact && (
                             <Link href="/" title="Orbit" className="relative w-7 h-7 shrink-0 flex items-center justify-center">
                                 <Image
-                                    src="/logos/image.png"
+                                    src="/logo-mark.svg"
                                     alt="Orbit"
                                     width={28}
                                     height={28}

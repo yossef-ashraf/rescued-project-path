@@ -19,7 +19,7 @@ import {
     Clock
 } from 'lucide-react';
 import { ShareButton } from '@/features/sharing';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 
 export function MaterialHeader({

@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookOpen, Clock, Calendar, CheckCircle2, ChevronLeft, ChevronRight, Share2, Trash2 } from 'lucide-react';
 import { ShareButton } from '@/features/sharing';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function LessonCard({ lesson, courseId, basePath = null, onDelete, isDeleting = false }) {
     const { t, lang } = useApp();

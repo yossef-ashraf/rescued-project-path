@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from '@/shared/next-compat/link';
 import { useRouter } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import {
     BookOpen,
     CheckCircle2,

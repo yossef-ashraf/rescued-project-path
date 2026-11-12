@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Link from '@/shared/next-compat/link';
 import { useSearchParams } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import {
     Printer,
     Download,
@@ -889,7 +889,7 @@ export default function CourseBookPdfView({ courseId }) {
                 <div className="book-running-header hidden print:flex" dir="ltr">
                     <div className="flex items-center gap-2">
                         <img
-                            src="/logos/image.png"
+                            src="/logo-mark.svg"
                             alt="Logo"
                             className="w-5 h-5 object-contain shrink-0"
                         />
@@ -910,7 +910,7 @@ export default function CourseBookPdfView({ courseId }) {
                     <div className="w-full flex items-center justify-between pb-4 border-b border-zinc-200 print:border-zinc-300" dir="ltr">
                         <div className="flex items-center gap-2">
                             <img
-                                src="/logos/image.png"
+                                src="/logo-mark.svg"
                                 alt="Orbit Logo"
                                 className="w-5 h-5 object-contain shrink-0"
                             />
@@ -1034,7 +1034,7 @@ export default function CourseBookPdfView({ courseId }) {
                         <div className="w-full flex items-center justify-between pb-3 border-b border-zinc-200 print:border-zinc-300" dir="ltr">
                             <div className="flex items-center gap-2">
                                 <img
-                                    src="/logos/image.png"
+                                    src="/logo-mark.svg"
                                     alt="Orbit Logo"
                                     className="w-5 h-5 object-contain shrink-0"
                                 />
@@ -1136,7 +1136,7 @@ export default function CourseBookPdfView({ courseId }) {
                             <div className="w-full flex items-center justify-between pb-3 border-b border-zinc-200 print:border-zinc-300" dir="ltr">
                                 <div className="flex items-center gap-2">
                                     <img
-                                        src="/logos/image.png"
+                                        src="/logo-mark.svg"
                                         alt="Orbit Logo"
                                         className="w-5 h-5 object-contain shrink-0"
                                     />
@@ -1578,7 +1578,7 @@ export default function CourseBookPdfView({ courseId }) {
                         <div className="w-full flex items-center justify-between pb-3 border-b border-zinc-200 print:border-zinc-300" dir="ltr">
                             <div className="flex items-center gap-2">
                                 <img
-                                    src="/logos/image.png"
+                                    src="/logo-mark.svg"
                                     alt="Orbit Logo"
                                     className="w-5 h-5 object-contain shrink-0"
                                 />

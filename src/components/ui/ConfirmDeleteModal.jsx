@@ -5,7 +5,7 @@ import React, { useState, useEffect, useSyncExternalStore } from 'react';
 const emptySubscribe = () => () => {};
 import { createPortal } from 'react-dom';
 import { Trash2, X, Loader2 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export default function ConfirmDeleteModal({
     isOpen,

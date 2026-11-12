@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
 import Link from '@/shared/next-compat/link';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import ProductivityHeatmap from '@/components/shared/ProductivityHeatmap';
 import { cn } from '@/shared/utils/utils.js';
 import {

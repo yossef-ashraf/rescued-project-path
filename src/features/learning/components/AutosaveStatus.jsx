@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Cloud, CloudUpload, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function AutosaveStatus({ status = 'saved', lastSavedAt = null, className = '' }) {
     const { t, lang } = useApp();

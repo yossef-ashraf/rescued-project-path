@@ -1,6 +1,12 @@
-import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
+import { getDbClient } from '@/shared/database/db-context.server.js';
+
+// Files not sent to Google Drive are stored in the private Lovable Cloud "uploads" bucket and served from /uploads/<name>.
+async function storeInCloud(key, buffer, contentType) {
+    const { error } = await getDbClient().storage.from('uploads').upload(key, buffer, { contentType, upsert: true });
+    if (error) throw new Error(error.message);
+}
 import { getGoogleDriveConfig, uploadBufferToGoogleDrive } from '@/features/settings/services/google-drive.js';
 import { requireAuth, ok, badRequest, unauthorized, serverError } from '@/shared/utils/response.js';
 
@@ -134,17 +140,11 @@ export class UploadController {
             }
 
             if (entityName === 'Hero_Video' || (ext === '.mp4' && String(entityName).toLowerCase().includes('video'))) {
-                const publicHeroPath = path.join(process.cwd(), 'public', 'backend-hero.mp4');
-                await writeFile(publicHeroPath, buffer);
-                try {
-                    const profileHeroPath = path.resolve(process.cwd(), '..', 'Profile', 'public', 'backend-hero.mp4');
-                    await writeFile(profileHeroPath, buffer);
-                } catch {}
-
+                await storeInCloud('backend-hero.mp4', buffer, 'video/mp4');
                 return ok({
                     success: true,
-                    url: '/backend-hero.mp4',
-                    filePath: '/backend-hero.mp4',
+                    url: '/uploads/backend-hero.mp4',
+                    filePath: '/uploads/backend-hero.mp4',
                     filename: 'backend-hero.mp4',
                     storage: 'local'
                 });
@@ -181,11 +181,7 @@ export class UploadController {
                 }
             }
 
-            const uploadDir = path.join(process.cwd(), 'storage', 'uploads');
-            await mkdir(uploadDir, { recursive: true });
-            const filePath = path.join(uploadDir, uniqueFilename);
-
-            await writeFile(filePath, buffer);
+            await storeInCloud(uniqueFilename, buffer, file.type || 'application/octet-stream');
 
             const localUrl = `/uploads/${encodeURIComponent(uniqueFilename)}`;
             return ok({

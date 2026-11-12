@@ -1,12 +1,12 @@
 'use client';
 import React, { useEffect, useState, useMemo } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Timeline } from '@/components/ui/timeline';
 import { Plus, Search, Edit3, Trash2, Calendar, ArrowUpRight, ArrowDownRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from '@/shared/next-compat/link';
 import { fetchFinanceMonths, saveFinanceMonth, deleteFinanceMonth } from '@/features/treasury/api/months.api.js';
-import { filterAndSortMonths, formatTimelineItems } from '@/features/treasury/utils/months.logic.js';
+import { filterAndSortMonths, formatTimelineItems } from '@/features/treasury/utils/months.logic.jsx';
 
 export default function MonthlyBreakdownView() {
     const { t } = useApp();

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from '@/shared/next-compat/link';
 import { usePathname } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 import { WORKSPACES, isWorkspaceActive } from './WorkspaceSwitcher';
 import { Sheet } from '@/components/ui/Sheet';

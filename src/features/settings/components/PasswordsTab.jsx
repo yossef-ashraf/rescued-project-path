@@ -5,7 +5,7 @@ import {
     Key, Plus, Trash2, Edit2, Eye, EyeOff,
     Copy, Check, ExternalLink, Globe, User, Search, RefreshCw, Lock, Unlock
 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import ConfirmDeleteModal from '@/components/ui/ConfirmDeleteModal';
 import { fetchVaultPasswords, saveVaultPassword, deleteVaultPassword } from '@/features/settings/api/settings.api.js';
 

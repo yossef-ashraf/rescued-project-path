@@ -18,6 +18,6 @@ export async function revokeSharedLink(token) {
 }
 
 export async function resolveSharedLink(token, passphrase) {
-    const url = passphrase ? `/api/share/resolve?token=${encodeURIComponent(token)}&passphrase=${encodeURIComponent(passphrase)}` : `/api/share/resolve?token=${encodeURIComponent(token)}`;
+    const url = passphrase ? `/api/public/share/resolve?token=${encodeURIComponent(token)}&passphrase=${encodeURIComponent(passphrase)}` : `/api/public/share/resolve?token=${encodeURIComponent(token)}`;
     return apiClient(url);
 }

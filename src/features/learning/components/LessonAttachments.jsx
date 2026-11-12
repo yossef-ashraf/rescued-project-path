@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { Paperclip, Plus, Trash2, ExternalLink, UploadCloud, Loader2, CheckCircle2, Link2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { uploadFileWithSync } from '@/shared/storage/upload-helper.js';
 import { cn } from '@/shared/utils/utils.js';
 

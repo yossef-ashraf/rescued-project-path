@@ -7,7 +7,7 @@ import { Plus, BookOpen, Sparkles, Search, CheckCircle2, Clock } from 'lucide-re
 import LessonCard from './LessonCard.jsx';
 import LearningEmptyState from './LearningEmptyState.jsx';
 import { createLesson, deleteLesson } from '../api/lessons.api.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function CourseLessonsList({ lessons = [], courseId, totalUnits = 0, onLessonsUpdate, basePath = null }) {
     const { t, lang } = useApp();

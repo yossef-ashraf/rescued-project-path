@@ -17,7 +17,7 @@ import {
     Unlink,
     Plus
 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { announceMatteAlert } from '@/components/ui/MatteAlert';
 import { fetchCourseCategoriesAndMaterials, createCourse } from '@/features/learning/api/addCourse.api.js';
 import { Button } from '@/components/ui/button';

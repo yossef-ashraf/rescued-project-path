@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { BookOpen, CheckCircle, Clock, FileText } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function CourseStats({ course, lessonsCount = 0, materialsCount = 0 }) {
     const { t, lang } = useApp();

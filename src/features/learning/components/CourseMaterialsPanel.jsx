@@ -24,7 +24,7 @@ import {
     CheckCircle2
 } from 'lucide-react';
 import LearningEmptyState from './LearningEmptyState.jsx';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { addLessonAttachment, deleteLessonAttachment } from '@/features/learning/api/lessons.api.js';
 import { uploadFileWithSync } from '@/shared/storage/upload-helper.js';
 import { cn } from '@/shared/utils/utils.js';

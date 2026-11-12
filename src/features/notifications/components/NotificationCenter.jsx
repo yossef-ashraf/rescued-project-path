@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Bell } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { useNotifications, useNotificationDrawer } from '@/shared/hooks/useNotifications.js';
 import NotificationDrawer from '@/features/notifications/components/NotificationDrawer';
 

@@ -10,33 +10,1015 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CreditsRouteImport } from './routes/credits'
+import { Route as DebtsRouteImport } from './routes/debts'
+import { Route as DockRouteImport } from './routes/dock'
+import { Route as ExportRouteImport } from './routes/export'
+import { Route as FinancialReportsRouteImport } from './routes/financial-reports'
+import { Route as GoldRouteImport } from './routes/gold'
+import { Route as IntelligenceRouteImport } from './routes/intelligence'
+import { Route as LeadsRouteImport } from './routes/leads'
+import { Route as LearningRouteImport } from './routes/learning'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as LogsRouteImport } from './routes/logs'
+import { Route as MonthsRouteImport } from './routes/months'
+import { Route as OperationsRouteImport } from './routes/operations'
+import { Route as OverviewRouteImport } from './routes/overview'
+import { Route as PricesRouteImport } from './routes/prices'
+import { Route as ProjectTasksRouteImport } from './routes/project-tasks'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as PulseRouteImport } from './routes/pulse'
+import { Route as ReservesRouteImport } from './routes/reserves'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RetroAiConfRouteImport } from './routes/retro-ai-conf'
+import { Route as StreamsRouteImport } from './routes/streams'
+import { Route as SyncRouteImport } from './routes/sync'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as TreasuryRouteImport } from './routes/treasury'
+import { Route as ValuationRouteImport } from './routes/valuation'
+import { Route as ApiSplatRouteImport } from './routes/api/$'
+import { Route as CoursesIndexRouteImport } from './routes/courses.index'
+import { Route as CoursesAddCategoryRouteImport } from './routes/courses.add-category'
+import { Route as CoursesAddCourseRouteImport } from './routes/courses.add-course'
+import { Route as CoursesHierarchyRouteImport } from './routes/courses.hierarchy'
+import { Route as CoursesLessonsRouteImport } from './routes/courses.lessons'
+import { Route as CoursesNotesRouteImport } from './routes/courses.notes'
+import { Route as CoursesOnlyMindRouteImport } from './routes/courses.only-mind'
+import { Route as CoursesOnlymindRouteImport } from './routes/courses.onlymind'
+import { Route as CoursesOverviewRouteImport } from './routes/courses.overview'
+import { Route as CoursesSummariesRouteImport } from './routes/courses.summaries'
+import { Route as CoursesToolsRouteImport } from './routes/courses.tools'
+import { Route as NotesIndexRouteImport } from './routes/notes.index'
+import { Route as NotesOnlymindRouteImport } from './routes/notes.onlymind'
+import { Route as NotesToolsRouteImport } from './routes/notes.tools'
+import { Route as ProfileIndexRouteImport } from './routes/profile.index'
+import { Route as ProfileAboutRouteImport } from './routes/profile.about'
+import { Route as ProfileBasicRouteImport } from './routes/profile.basic'
+import { Route as ProfileEducationRouteImport } from './routes/profile.education'
+import { Route as ProfileExperienceRouteImport } from './routes/profile.experience'
+import { Route as ProfilePortfolioRouteImport } from './routes/profile.portfolio'
+import { Route as ProfileProjectsRouteImport } from './routes/profile.projects'
+import { Route as ProfileSkillsRouteImport } from './routes/profile.skills'
+import { Route as SettingsIndexRouteImport } from './routes/settings.index'
+import { Route as SettingsAutomationRouteImport } from './routes/settings.automation'
+import { Route as SettingsDriveConfigRouteImport } from './routes/settings.drive-config'
+import { Route as SettingsDriveMediaRouteImport } from './routes/settings.drive-media'
+import { Route as SettingsMediaRouteImport } from './routes/settings.media'
+import { Route as SettingsPasswordsRouteImport } from './routes/settings.passwords'
+import { Route as SettingsUsersRouteImport } from './routes/settings.users'
+import { Route as ShareTokenRouteImport } from './routes/share.$token'
+import { Route as TasksIndexRouteImport } from './routes/tasks.index'
+import { Route as TasksOverviewRouteImport } from './routes/tasks.overview'
+import { Route as TasksProjectTasksRouteImport } from './routes/tasks.project-tasks'
+import { Route as TasksTodoRouteImport } from './routes/tasks.todo'
+import { Route as UploadsSplatRouteImport } from './routes/uploads.$'
+import { Route as ApiPublicSplatRouteImport } from './routes/api/public/$'
+import { Route as CoursesIdIndexRouteImport } from './routes/courses.$id.index'
+import { Route as CoursesIdBookRouteImport } from './routes/courses.$id.book'
+import { Route as CoursesEditIdRouteImport } from './routes/courses.edit.$id'
+import { Route as CoursesMaterialsIndexRouteImport } from './routes/courses.materials.index'
+import { Route as CoursesMaterialsLessonsRouteImport } from './routes/courses.materials.lessons'
+import { Route as ShareSTokenRouteImport } from './routes/share.s.$token'
+import { Route as CoursesIdLessonsLessonIdRouteImport } from './routes/courses.$id.lessons.$lessonId'
+import { Route as CoursesIdLessonsNewRouteImport } from './routes/courses.$id.lessons.new'
+import { Route as CoursesMaterialsIdIndexRouteImport } from './routes/courses.materials.$id.index'
+import { Route as CoursesMaterialsIdLessonsLessonIdRouteImport } from './routes/courses.materials.$id.lessons.$lessonId'
+import { Route as CoursesMaterialsIdLessonsNewRouteImport } from './routes/courses.materials.$id.lessons.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreditsRoute = CreditsRouteImport.update({
+  id: '/credits',
+  path: '/credits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DebtsRoute = DebtsRouteImport.update({
+  id: '/debts',
+  path: '/debts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DockRoute = DockRouteImport.update({
+  id: '/dock',
+  path: '/dock',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExportRoute = ExportRouteImport.update({
+  id: '/export',
+  path: '/export',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinancialReportsRoute = FinancialReportsRouteImport.update({
+  id: '/financial-reports',
+  path: '/financial-reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoldRoute = GoldRouteImport.update({
+  id: '/gold',
+  path: '/gold',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntelligenceRoute = IntelligenceRouteImport.update({
+  id: '/intelligence',
+  path: '/intelligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LeadsRoute = LeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningRoute = LearningRouteImport.update({
+  id: '/learning',
+  path: '/learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogsRoute = LogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MonthsRoute = MonthsRouteImport.update({
+  id: '/months',
+  path: '/months',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OperationsRoute = OperationsRouteImport.update({
+  id: '/operations',
+  path: '/operations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OverviewRoute = OverviewRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricesRoute = PricesRouteImport.update({
+  id: '/prices',
+  path: '/prices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectTasksRoute = ProjectTasksRouteImport.update({
+  id: '/project-tasks',
+  path: '/project-tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PulseRoute = PulseRouteImport.update({
+  id: '/pulse',
+  path: '/pulse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReservesRoute = ReservesRouteImport.update({
+  id: '/reserves',
+  path: '/reserves',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RetroAiConfRoute = RetroAiConfRouteImport.update({
+  id: '/retro-ai-conf',
+  path: '/retro-ai-conf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StreamsRoute = StreamsRouteImport.update({
+  id: '/streams',
+  path: '/streams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SyncRoute = SyncRouteImport.update({
+  id: '/sync',
+  path: '/sync',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TreasuryRoute = TreasuryRouteImport.update({
+  id: '/treasury',
+  path: '/treasury',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ValuationRoute = ValuationRouteImport.update({
+  id: '/valuation',
+  path: '/valuation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSplatRoute = ApiSplatRouteImport.update({
+  id: '/api/$',
+  path: '/api/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesIndexRoute = CoursesIndexRouteImport.update({
+  id: '/courses/',
+  path: '/courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesAddCategoryRoute = CoursesAddCategoryRouteImport.update({
+  id: '/courses/add-category',
+  path: '/courses/add-category',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesAddCourseRoute = CoursesAddCourseRouteImport.update({
+  id: '/courses/add-course',
+  path: '/courses/add-course',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesHierarchyRoute = CoursesHierarchyRouteImport.update({
+  id: '/courses/hierarchy',
+  path: '/courses/hierarchy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesLessonsRoute = CoursesLessonsRouteImport.update({
+  id: '/courses/lessons',
+  path: '/courses/lessons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesNotesRoute = CoursesNotesRouteImport.update({
+  id: '/courses/notes',
+  path: '/courses/notes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesOnlyMindRoute = CoursesOnlyMindRouteImport.update({
+  id: '/courses/only-mind',
+  path: '/courses/only-mind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesOnlymindRoute = CoursesOnlymindRouteImport.update({
+  id: '/courses/onlymind',
+  path: '/courses/onlymind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesOverviewRoute = CoursesOverviewRouteImport.update({
+  id: '/courses/overview',
+  path: '/courses/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesSummariesRoute = CoursesSummariesRouteImport.update({
+  id: '/courses/summaries',
+  path: '/courses/summaries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesToolsRoute = CoursesToolsRouteImport.update({
+  id: '/courses/tools',
+  path: '/courses/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesIndexRoute = NotesIndexRouteImport.update({
+  id: '/notes/',
+  path: '/notes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesOnlymindRoute = NotesOnlymindRouteImport.update({
+  id: '/notes/onlymind',
+  path: '/notes/onlymind',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotesToolsRoute = NotesToolsRouteImport.update({
+  id: '/notes/tools',
+  path: '/notes/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileAboutRoute = ProfileAboutRouteImport.update({
+  id: '/profile/about',
+  path: '/profile/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileBasicRoute = ProfileBasicRouteImport.update({
+  id: '/profile/basic',
+  path: '/profile/basic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileEducationRoute = ProfileEducationRouteImport.update({
+  id: '/profile/education',
+  path: '/profile/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileExperienceRoute = ProfileExperienceRouteImport.update({
+  id: '/profile/experience',
+  path: '/profile/experience',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfilePortfolioRoute = ProfilePortfolioRouteImport.update({
+  id: '/profile/portfolio',
+  path: '/profile/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileProjectsRoute = ProfileProjectsRouteImport.update({
+  id: '/profile/projects',
+  path: '/profile/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileSkillsRoute = ProfileSkillsRouteImport.update({
+  id: '/profile/skills',
+  path: '/profile/skills',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsIndexRoute = SettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsAutomationRoute = SettingsAutomationRouteImport.update({
+  id: '/settings/automation',
+  path: '/settings/automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsDriveConfigRoute = SettingsDriveConfigRouteImport.update({
+  id: '/settings/drive-config',
+  path: '/settings/drive-config',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsDriveMediaRoute = SettingsDriveMediaRouteImport.update({
+  id: '/settings/drive-media',
+  path: '/settings/drive-media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsMediaRoute = SettingsMediaRouteImport.update({
+  id: '/settings/media',
+  path: '/settings/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsPasswordsRoute = SettingsPasswordsRouteImport.update({
+  id: '/settings/passwords',
+  path: '/settings/passwords',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsUsersRoute = SettingsUsersRouteImport.update({
+  id: '/settings/users',
+  path: '/settings/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShareTokenRoute = ShareTokenRouteImport.update({
+  id: '/share/$token',
+  path: '/share/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksIndexRoute = TasksIndexRouteImport.update({
+  id: '/tasks/',
+  path: '/tasks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksOverviewRoute = TasksOverviewRouteImport.update({
+  id: '/tasks/overview',
+  path: '/tasks/overview',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksProjectTasksRoute = TasksProjectTasksRouteImport.update({
+  id: '/tasks/project-tasks',
+  path: '/tasks/project-tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TasksTodoRoute = TasksTodoRouteImport.update({
+  id: '/tasks/todo',
+  path: '/tasks/todo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UploadsSplatRoute = UploadsSplatRouteImport.update({
+  id: '/uploads/$',
+  path: '/uploads/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSplatRoute = ApiPublicSplatRouteImport.update({
+  id: '/api/public/$',
+  path: '/api/public/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesIdIndexRoute = CoursesIdIndexRouteImport.update({
+  id: '/courses/$id/',
+  path: '/courses/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesIdBookRoute = CoursesIdBookRouteImport.update({
+  id: '/courses/$id/book',
+  path: '/courses/$id/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesEditIdRoute = CoursesEditIdRouteImport.update({
+  id: '/courses/edit/$id',
+  path: '/courses/edit/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesMaterialsIndexRoute = CoursesMaterialsIndexRouteImport.update({
+  id: '/courses/materials/',
+  path: '/courses/materials/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesMaterialsLessonsRoute = CoursesMaterialsLessonsRouteImport.update({
+  id: '/courses/materials/lessons',
+  path: '/courses/materials/lessons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShareSTokenRoute = ShareSTokenRouteImport.update({
+  id: '/share/s/$token',
+  path: '/share/s/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesIdLessonsLessonIdRoute =
+  CoursesIdLessonsLessonIdRouteImport.update({
+    id: '/courses/$id/lessons/$lessonId',
+    path: '/courses/$id/lessons/$lessonId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CoursesIdLessonsNewRoute = CoursesIdLessonsNewRouteImport.update({
+  id: '/courses/$id/lessons/new',
+  path: '/courses/$id/lessons/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesMaterialsIdIndexRoute = CoursesMaterialsIdIndexRouteImport.update({
+  id: '/courses/materials/$id/',
+  path: '/courses/materials/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesMaterialsIdLessonsLessonIdRoute =
+  CoursesMaterialsIdLessonsLessonIdRouteImport.update({
+    id: '/courses/materials/$id/lessons/$lessonId',
+    path: '/courses/materials/$id/lessons/$lessonId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CoursesMaterialsIdLessonsNewRoute =
+  CoursesMaterialsIdLessonsNewRouteImport.update({
+    id: '/courses/materials/$id/lessons/new',
+    path: '/courses/materials/$id/lessons/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/credits': typeof CreditsRoute
+  '/debts': typeof DebtsRoute
+  '/dock': typeof DockRoute
+  '/export': typeof ExportRoute
+  '/financial-reports': typeof FinancialReportsRoute
+  '/gold': typeof GoldRoute
+  '/intelligence': typeof IntelligenceRoute
+  '/leads': typeof LeadsRoute
+  '/learning': typeof LearningRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/months': typeof MonthsRoute
+  '/operations': typeof OperationsRoute
+  '/overview': typeof OverviewRoute
+  '/prices': typeof PricesRoute
+  '/project-tasks': typeof ProjectTasksRoute
+  '/projects': typeof ProjectsRoute
+  '/pulse': typeof PulseRoute
+  '/reserves': typeof ReservesRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/retro-ai-conf': typeof RetroAiConfRoute
+  '/streams': typeof StreamsRoute
+  '/sync': typeof SyncRoute
+  '/terms': typeof TermsRoute
+  '/timeline': typeof TimelineRoute
+  '/treasury': typeof TreasuryRoute
+  '/valuation': typeof ValuationRoute
+  '/api/$': typeof ApiSplatRoute
+  '/courses/add-category': typeof CoursesAddCategoryRoute
+  '/courses/add-course': typeof CoursesAddCourseRoute
+  '/courses/hierarchy': typeof CoursesHierarchyRoute
+  '/courses/lessons': typeof CoursesLessonsRoute
+  '/courses/notes': typeof CoursesNotesRoute
+  '/courses/only-mind': typeof CoursesOnlyMindRoute
+  '/courses/onlymind': typeof CoursesOnlymindRoute
+  '/courses/overview': typeof CoursesOverviewRoute
+  '/courses/summaries': typeof CoursesSummariesRoute
+  '/courses/tools': typeof CoursesToolsRoute
+  '/notes/onlymind': typeof NotesOnlymindRoute
+  '/notes/tools': typeof NotesToolsRoute
+  '/profile/about': typeof ProfileAboutRoute
+  '/profile/basic': typeof ProfileBasicRoute
+  '/profile/education': typeof ProfileEducationRoute
+  '/profile/experience': typeof ProfileExperienceRoute
+  '/profile/portfolio': typeof ProfilePortfolioRoute
+  '/profile/projects': typeof ProfileProjectsRoute
+  '/profile/skills': typeof ProfileSkillsRoute
+  '/settings/automation': typeof SettingsAutomationRoute
+  '/settings/drive-config': typeof SettingsDriveConfigRoute
+  '/settings/drive-media': typeof SettingsDriveMediaRoute
+  '/settings/media': typeof SettingsMediaRoute
+  '/settings/passwords': typeof SettingsPasswordsRoute
+  '/settings/users': typeof SettingsUsersRoute
+  '/share/$token': typeof ShareTokenRoute
+  '/tasks/overview': typeof TasksOverviewRoute
+  '/tasks/project-tasks': typeof TasksProjectTasksRoute
+  '/tasks/todo': typeof TasksTodoRoute
+  '/uploads/$': typeof UploadsSplatRoute
+  '/courses/': typeof CoursesIndexRoute
+  '/notes/': typeof NotesIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/settings/': typeof SettingsIndexRoute
+  '/tasks/': typeof TasksIndexRoute
+  '/api/public/$': typeof ApiPublicSplatRoute
+  '/courses/$id/book': typeof CoursesIdBookRoute
+  '/courses/edit/$id': typeof CoursesEditIdRoute
+  '/courses/materials/lessons': typeof CoursesMaterialsLessonsRoute
+  '/share/s/$token': typeof ShareSTokenRoute
+  '/courses/$id/': typeof CoursesIdIndexRoute
+  '/courses/materials/': typeof CoursesMaterialsIndexRoute
+  '/courses/$id/lessons/$lessonId': typeof CoursesIdLessonsLessonIdRoute
+  '/courses/$id/lessons/new': typeof CoursesIdLessonsNewRoute
+  '/courses/materials/$id/': typeof CoursesMaterialsIdIndexRoute
+  '/courses/materials/$id/lessons/$lessonId': typeof CoursesMaterialsIdLessonsLessonIdRoute
+  '/courses/materials/$id/lessons/new': typeof CoursesMaterialsIdLessonsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/credits': typeof CreditsRoute
+  '/debts': typeof DebtsRoute
+  '/dock': typeof DockRoute
+  '/export': typeof ExportRoute
+  '/financial-reports': typeof FinancialReportsRoute
+  '/gold': typeof GoldRoute
+  '/intelligence': typeof IntelligenceRoute
+  '/leads': typeof LeadsRoute
+  '/learning': typeof LearningRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/months': typeof MonthsRoute
+  '/operations': typeof OperationsRoute
+  '/overview': typeof OverviewRoute
+  '/prices': typeof PricesRoute
+  '/project-tasks': typeof ProjectTasksRoute
+  '/projects': typeof ProjectsRoute
+  '/pulse': typeof PulseRoute
+  '/reserves': typeof ReservesRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/retro-ai-conf': typeof RetroAiConfRoute
+  '/streams': typeof StreamsRoute
+  '/sync': typeof SyncRoute
+  '/terms': typeof TermsRoute
+  '/timeline': typeof TimelineRoute
+  '/treasury': typeof TreasuryRoute
+  '/valuation': typeof ValuationRoute
+  '/api/$': typeof ApiSplatRoute
+  '/courses/add-category': typeof CoursesAddCategoryRoute
+  '/courses/add-course': typeof CoursesAddCourseRoute
+  '/courses/hierarchy': typeof CoursesHierarchyRoute
+  '/courses/lessons': typeof CoursesLessonsRoute
+  '/courses/notes': typeof CoursesNotesRoute
+  '/courses/only-mind': typeof CoursesOnlyMindRoute
+  '/courses/onlymind': typeof CoursesOnlymindRoute
+  '/courses/overview': typeof CoursesOverviewRoute
+  '/courses/summaries': typeof CoursesSummariesRoute
+  '/courses/tools': typeof CoursesToolsRoute
+  '/notes/onlymind': typeof NotesOnlymindRoute
+  '/notes/tools': typeof NotesToolsRoute
+  '/profile/about': typeof ProfileAboutRoute
+  '/profile/basic': typeof ProfileBasicRoute
+  '/profile/education': typeof ProfileEducationRoute
+  '/profile/experience': typeof ProfileExperienceRoute
+  '/profile/portfolio': typeof ProfilePortfolioRoute
+  '/profile/projects': typeof ProfileProjectsRoute
+  '/profile/skills': typeof ProfileSkillsRoute
+  '/settings/automation': typeof SettingsAutomationRoute
+  '/settings/drive-config': typeof SettingsDriveConfigRoute
+  '/settings/drive-media': typeof SettingsDriveMediaRoute
+  '/settings/media': typeof SettingsMediaRoute
+  '/settings/passwords': typeof SettingsPasswordsRoute
+  '/settings/users': typeof SettingsUsersRoute
+  '/share/$token': typeof ShareTokenRoute
+  '/tasks/overview': typeof TasksOverviewRoute
+  '/tasks/project-tasks': typeof TasksProjectTasksRoute
+  '/tasks/todo': typeof TasksTodoRoute
+  '/uploads/$': typeof UploadsSplatRoute
+  '/courses': typeof CoursesIndexRoute
+  '/notes': typeof NotesIndexRoute
+  '/profile': typeof ProfileIndexRoute
+  '/settings': typeof SettingsIndexRoute
+  '/tasks': typeof TasksIndexRoute
+  '/api/public/$': typeof ApiPublicSplatRoute
+  '/courses/$id/book': typeof CoursesIdBookRoute
+  '/courses/edit/$id': typeof CoursesEditIdRoute
+  '/courses/materials/lessons': typeof CoursesMaterialsLessonsRoute
+  '/share/s/$token': typeof ShareSTokenRoute
+  '/courses/$id': typeof CoursesIdIndexRoute
+  '/courses/materials': typeof CoursesMaterialsIndexRoute
+  '/courses/$id/lessons/$lessonId': typeof CoursesIdLessonsLessonIdRoute
+  '/courses/$id/lessons/new': typeof CoursesIdLessonsNewRoute
+  '/courses/materials/$id': typeof CoursesMaterialsIdIndexRoute
+  '/courses/materials/$id/lessons/$lessonId': typeof CoursesMaterialsIdLessonsLessonIdRoute
+  '/courses/materials/$id/lessons/new': typeof CoursesMaterialsIdLessonsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/credits': typeof CreditsRoute
+  '/debts': typeof DebtsRoute
+  '/dock': typeof DockRoute
+  '/export': typeof ExportRoute
+  '/financial-reports': typeof FinancialReportsRoute
+  '/gold': typeof GoldRoute
+  '/intelligence': typeof IntelligenceRoute
+  '/leads': typeof LeadsRoute
+  '/learning': typeof LearningRoute
+  '/login': typeof LoginRoute
+  '/logs': typeof LogsRoute
+  '/months': typeof MonthsRoute
+  '/operations': typeof OperationsRoute
+  '/overview': typeof OverviewRoute
+  '/prices': typeof PricesRoute
+  '/project-tasks': typeof ProjectTasksRoute
+  '/projects': typeof ProjectsRoute
+  '/pulse': typeof PulseRoute
+  '/reserves': typeof ReservesRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/retro-ai-conf': typeof RetroAiConfRoute
+  '/streams': typeof StreamsRoute
+  '/sync': typeof SyncRoute
+  '/terms': typeof TermsRoute
+  '/timeline': typeof TimelineRoute
+  '/treasury': typeof TreasuryRoute
+  '/valuation': typeof ValuationRoute
+  '/api/$': typeof ApiSplatRoute
+  '/courses/add-category': typeof CoursesAddCategoryRoute
+  '/courses/add-course': typeof CoursesAddCourseRoute
+  '/courses/hierarchy': typeof CoursesHierarchyRoute
+  '/courses/lessons': typeof CoursesLessonsRoute
+  '/courses/notes': typeof CoursesNotesRoute
+  '/courses/only-mind': typeof CoursesOnlyMindRoute
+  '/courses/onlymind': typeof CoursesOnlymindRoute
+  '/courses/overview': typeof CoursesOverviewRoute
+  '/courses/summaries': typeof CoursesSummariesRoute
+  '/courses/tools': typeof CoursesToolsRoute
+  '/notes/onlymind': typeof NotesOnlymindRoute
+  '/notes/tools': typeof NotesToolsRoute
+  '/profile/about': typeof ProfileAboutRoute
+  '/profile/basic': typeof ProfileBasicRoute
+  '/profile/education': typeof ProfileEducationRoute
+  '/profile/experience': typeof ProfileExperienceRoute
+  '/profile/portfolio': typeof ProfilePortfolioRoute
+  '/profile/projects': typeof ProfileProjectsRoute
+  '/profile/skills': typeof ProfileSkillsRoute
+  '/settings/automation': typeof SettingsAutomationRoute
+  '/settings/drive-config': typeof SettingsDriveConfigRoute
+  '/settings/drive-media': typeof SettingsDriveMediaRoute
+  '/settings/media': typeof SettingsMediaRoute
+  '/settings/passwords': typeof SettingsPasswordsRoute
+  '/settings/users': typeof SettingsUsersRoute
+  '/share/$token': typeof ShareTokenRoute
+  '/tasks/overview': typeof TasksOverviewRoute
+  '/tasks/project-tasks': typeof TasksProjectTasksRoute
+  '/tasks/todo': typeof TasksTodoRoute
+  '/uploads/$': typeof UploadsSplatRoute
+  '/courses/': typeof CoursesIndexRoute
+  '/notes/': typeof NotesIndexRoute
+  '/profile/': typeof ProfileIndexRoute
+  '/settings/': typeof SettingsIndexRoute
+  '/tasks/': typeof TasksIndexRoute
+  '/api/public/$': typeof ApiPublicSplatRoute
+  '/courses/$id/book': typeof CoursesIdBookRoute
+  '/courses/edit/$id': typeof CoursesEditIdRoute
+  '/courses/materials/lessons': typeof CoursesMaterialsLessonsRoute
+  '/share/s/$token': typeof ShareSTokenRoute
+  '/courses/$id/': typeof CoursesIdIndexRoute
+  '/courses/materials/': typeof CoursesMaterialsIndexRoute
+  '/courses/$id/lessons/$lessonId': typeof CoursesIdLessonsLessonIdRoute
+  '/courses/$id/lessons/new': typeof CoursesIdLessonsNewRoute
+  '/courses/materials/$id/': typeof CoursesMaterialsIdIndexRoute
+  '/courses/materials/$id/lessons/$lessonId': typeof CoursesMaterialsIdLessonsLessonIdRoute
+  '/courses/materials/$id/lessons/new': typeof CoursesMaterialsIdLessonsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/credits'
+    | '/debts'
+    | '/dock'
+    | '/export'
+    | '/financial-reports'
+    | '/gold'
+    | '/intelligence'
+    | '/leads'
+    | '/learning'
+    | '/login'
+    | '/logs'
+    | '/months'
+    | '/operations'
+    | '/overview'
+    | '/prices'
+    | '/project-tasks'
+    | '/projects'
+    | '/pulse'
+    | '/reserves'
+    | '/reset-password'
+    | '/retro-ai-conf'
+    | '/streams'
+    | '/sync'
+    | '/terms'
+    | '/timeline'
+    | '/treasury'
+    | '/valuation'
+    | '/api/$'
+    | '/courses/add-category'
+    | '/courses/add-course'
+    | '/courses/hierarchy'
+    | '/courses/lessons'
+    | '/courses/notes'
+    | '/courses/only-mind'
+    | '/courses/onlymind'
+    | '/courses/overview'
+    | '/courses/summaries'
+    | '/courses/tools'
+    | '/notes/onlymind'
+    | '/notes/tools'
+    | '/profile/about'
+    | '/profile/basic'
+    | '/profile/education'
+    | '/profile/experience'
+    | '/profile/portfolio'
+    | '/profile/projects'
+    | '/profile/skills'
+    | '/settings/automation'
+    | '/settings/drive-config'
+    | '/settings/drive-media'
+    | '/settings/media'
+    | '/settings/passwords'
+    | '/settings/users'
+    | '/share/$token'
+    | '/tasks/overview'
+    | '/tasks/project-tasks'
+    | '/tasks/todo'
+    | '/uploads/$'
+    | '/courses/'
+    | '/notes/'
+    | '/profile/'
+    | '/settings/'
+    | '/tasks/'
+    | '/api/public/$'
+    | '/courses/$id/book'
+    | '/courses/edit/$id'
+    | '/courses/materials/lessons'
+    | '/share/s/$token'
+    | '/courses/$id/'
+    | '/courses/materials/'
+    | '/courses/$id/lessons/$lessonId'
+    | '/courses/$id/lessons/new'
+    | '/courses/materials/$id/'
+    | '/courses/materials/$id/lessons/$lessonId'
+    | '/courses/materials/$id/lessons/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/credits'
+    | '/debts'
+    | '/dock'
+    | '/export'
+    | '/financial-reports'
+    | '/gold'
+    | '/intelligence'
+    | '/leads'
+    | '/learning'
+    | '/login'
+    | '/logs'
+    | '/months'
+    | '/operations'
+    | '/overview'
+    | '/prices'
+    | '/project-tasks'
+    | '/projects'
+    | '/pulse'
+    | '/reserves'
+    | '/reset-password'
+    | '/retro-ai-conf'
+    | '/streams'
+    | '/sync'
+    | '/terms'
+    | '/timeline'
+    | '/treasury'
+    | '/valuation'
+    | '/api/$'
+    | '/courses/add-category'
+    | '/courses/add-course'
+    | '/courses/hierarchy'
+    | '/courses/lessons'
+    | '/courses/notes'
+    | '/courses/only-mind'
+    | '/courses/onlymind'
+    | '/courses/overview'
+    | '/courses/summaries'
+    | '/courses/tools'
+    | '/notes/onlymind'
+    | '/notes/tools'
+    | '/profile/about'
+    | '/profile/basic'
+    | '/profile/education'
+    | '/profile/experience'
+    | '/profile/portfolio'
+    | '/profile/projects'
+    | '/profile/skills'
+    | '/settings/automation'
+    | '/settings/drive-config'
+    | '/settings/drive-media'
+    | '/settings/media'
+    | '/settings/passwords'
+    | '/settings/users'
+    | '/share/$token'
+    | '/tasks/overview'
+    | '/tasks/project-tasks'
+    | '/tasks/todo'
+    | '/uploads/$'
+    | '/courses'
+    | '/notes'
+    | '/profile'
+    | '/settings'
+    | '/tasks'
+    | '/api/public/$'
+    | '/courses/$id/book'
+    | '/courses/edit/$id'
+    | '/courses/materials/lessons'
+    | '/share/s/$token'
+    | '/courses/$id'
+    | '/courses/materials'
+    | '/courses/$id/lessons/$lessonId'
+    | '/courses/$id/lessons/new'
+    | '/courses/materials/$id'
+    | '/courses/materials/$id/lessons/$lessonId'
+    | '/courses/materials/$id/lessons/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/credits'
+    | '/debts'
+    | '/dock'
+    | '/export'
+    | '/financial-reports'
+    | '/gold'
+    | '/intelligence'
+    | '/leads'
+    | '/learning'
+    | '/login'
+    | '/logs'
+    | '/months'
+    | '/operations'
+    | '/overview'
+    | '/prices'
+    | '/project-tasks'
+    | '/projects'
+    | '/pulse'
+    | '/reserves'
+    | '/reset-password'
+    | '/retro-ai-conf'
+    | '/streams'
+    | '/sync'
+    | '/terms'
+    | '/timeline'
+    | '/treasury'
+    | '/valuation'
+    | '/api/$'
+    | '/courses/add-category'
+    | '/courses/add-course'
+    | '/courses/hierarchy'
+    | '/courses/lessons'
+    | '/courses/notes'
+    | '/courses/only-mind'
+    | '/courses/onlymind'
+    | '/courses/overview'
+    | '/courses/summaries'
+    | '/courses/tools'
+    | '/notes/onlymind'
+    | '/notes/tools'
+    | '/profile/about'
+    | '/profile/basic'
+    | '/profile/education'
+    | '/profile/experience'
+    | '/profile/portfolio'
+    | '/profile/projects'
+    | '/profile/skills'
+    | '/settings/automation'
+    | '/settings/drive-config'
+    | '/settings/drive-media'
+    | '/settings/media'
+    | '/settings/passwords'
+    | '/settings/users'
+    | '/share/$token'
+    | '/tasks/overview'
+    | '/tasks/project-tasks'
+    | '/tasks/todo'
+    | '/uploads/$'
+    | '/courses/'
+    | '/notes/'
+    | '/profile/'
+    | '/settings/'
+    | '/tasks/'
+    | '/api/public/$'
+    | '/courses/$id/book'
+    | '/courses/edit/$id'
+    | '/courses/materials/lessons'
+    | '/share/s/$token'
+    | '/courses/$id/'
+    | '/courses/materials/'
+    | '/courses/$id/lessons/$lessonId'
+    | '/courses/$id/lessons/new'
+    | '/courses/materials/$id/'
+    | '/courses/materials/$id/lessons/$lessonId'
+    | '/courses/materials/$id/lessons/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CreditsRoute: typeof CreditsRoute
+  DebtsRoute: typeof DebtsRoute
+  DockRoute: typeof DockRoute
+  ExportRoute: typeof ExportRoute
+  FinancialReportsRoute: typeof FinancialReportsRoute
+  GoldRoute: typeof GoldRoute
+  IntelligenceRoute: typeof IntelligenceRoute
+  LeadsRoute: typeof LeadsRoute
+  LearningRoute: typeof LearningRoute
+  LoginRoute: typeof LoginRoute
+  LogsRoute: typeof LogsRoute
+  MonthsRoute: typeof MonthsRoute
+  OperationsRoute: typeof OperationsRoute
+  OverviewRoute: typeof OverviewRoute
+  PricesRoute: typeof PricesRoute
+  ProjectTasksRoute: typeof ProjectTasksRoute
+  ProjectsRoute: typeof ProjectsRoute
+  PulseRoute: typeof PulseRoute
+  ReservesRoute: typeof ReservesRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  RetroAiConfRoute: typeof RetroAiConfRoute
+  StreamsRoute: typeof StreamsRoute
+  SyncRoute: typeof SyncRoute
+  TermsRoute: typeof TermsRoute
+  TimelineRoute: typeof TimelineRoute
+  TreasuryRoute: typeof TreasuryRoute
+  ValuationRoute: typeof ValuationRoute
+  ApiSplatRoute: typeof ApiSplatRoute
+  CoursesAddCategoryRoute: typeof CoursesAddCategoryRoute
+  CoursesAddCourseRoute: typeof CoursesAddCourseRoute
+  CoursesHierarchyRoute: typeof CoursesHierarchyRoute
+  CoursesLessonsRoute: typeof CoursesLessonsRoute
+  CoursesNotesRoute: typeof CoursesNotesRoute
+  CoursesOnlyMindRoute: typeof CoursesOnlyMindRoute
+  CoursesOnlymindRoute: typeof CoursesOnlymindRoute
+  CoursesOverviewRoute: typeof CoursesOverviewRoute
+  CoursesSummariesRoute: typeof CoursesSummariesRoute
+  CoursesToolsRoute: typeof CoursesToolsRoute
+  NotesOnlymindRoute: typeof NotesOnlymindRoute
+  NotesToolsRoute: typeof NotesToolsRoute
+  ProfileAboutRoute: typeof ProfileAboutRoute
+  ProfileBasicRoute: typeof ProfileBasicRoute
+  ProfileEducationRoute: typeof ProfileEducationRoute
+  ProfileExperienceRoute: typeof ProfileExperienceRoute
+  ProfilePortfolioRoute: typeof ProfilePortfolioRoute
+  ProfileProjectsRoute: typeof ProfileProjectsRoute
+  ProfileSkillsRoute: typeof ProfileSkillsRoute
+  SettingsAutomationRoute: typeof SettingsAutomationRoute
+  SettingsDriveConfigRoute: typeof SettingsDriveConfigRoute
+  SettingsDriveMediaRoute: typeof SettingsDriveMediaRoute
+  SettingsMediaRoute: typeof SettingsMediaRoute
+  SettingsPasswordsRoute: typeof SettingsPasswordsRoute
+  SettingsUsersRoute: typeof SettingsUsersRoute
+  ShareTokenRoute: typeof ShareTokenRoute
+  TasksOverviewRoute: typeof TasksOverviewRoute
+  TasksProjectTasksRoute: typeof TasksProjectTasksRoute
+  TasksTodoRoute: typeof TasksTodoRoute
+  UploadsSplatRoute: typeof UploadsSplatRoute
+  CoursesIndexRoute: typeof CoursesIndexRoute
+  NotesIndexRoute: typeof NotesIndexRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+  SettingsIndexRoute: typeof SettingsIndexRoute
+  TasksIndexRoute: typeof TasksIndexRoute
+  ApiPublicSplatRoute: typeof ApiPublicSplatRoute
+  CoursesIdBookRoute: typeof CoursesIdBookRoute
+  CoursesEditIdRoute: typeof CoursesEditIdRoute
+  CoursesMaterialsLessonsRoute: typeof CoursesMaterialsLessonsRoute
+  ShareSTokenRoute: typeof ShareSTokenRoute
+  CoursesIdIndexRoute: typeof CoursesIdIndexRoute
+  CoursesMaterialsIndexRoute: typeof CoursesMaterialsIndexRoute
+  CoursesIdLessonsLessonIdRoute: typeof CoursesIdLessonsLessonIdRoute
+  CoursesIdLessonsNewRoute: typeof CoursesIdLessonsNewRoute
+  CoursesMaterialsIdIndexRoute: typeof CoursesMaterialsIdIndexRoute
+  CoursesMaterialsIdLessonsLessonIdRoute: typeof CoursesMaterialsIdLessonsLessonIdRoute
+  CoursesMaterialsIdLessonsNewRoute: typeof CoursesMaterialsIdLessonsNewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +1030,612 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/credits': {
+      id: '/credits'
+      path: '/credits'
+      fullPath: '/credits'
+      preLoaderRoute: typeof CreditsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/debts': {
+      id: '/debts'
+      path: '/debts'
+      fullPath: '/debts'
+      preLoaderRoute: typeof DebtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dock': {
+      id: '/dock'
+      path: '/dock'
+      fullPath: '/dock'
+      preLoaderRoute: typeof DockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/export': {
+      id: '/export'
+      path: '/export'
+      fullPath: '/export'
+      preLoaderRoute: typeof ExportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/financial-reports': {
+      id: '/financial-reports'
+      path: '/financial-reports'
+      fullPath: '/financial-reports'
+      preLoaderRoute: typeof FinancialReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gold': {
+      id: '/gold'
+      path: '/gold'
+      fullPath: '/gold'
+      preLoaderRoute: typeof GoldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/intelligence': {
+      id: '/intelligence'
+      path: '/intelligence'
+      fullPath: '/intelligence'
+      preLoaderRoute: typeof IntelligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/leads': {
+      id: '/leads'
+      path: '/leads'
+      fullPath: '/leads'
+      preLoaderRoute: typeof LeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learning': {
+      id: '/learning'
+      path: '/learning'
+      fullPath: '/learning'
+      preLoaderRoute: typeof LearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logs': {
+      id: '/logs'
+      path: '/logs'
+      fullPath: '/logs'
+      preLoaderRoute: typeof LogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/months': {
+      id: '/months'
+      path: '/months'
+      fullPath: '/months'
+      preLoaderRoute: typeof MonthsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/operations': {
+      id: '/operations'
+      path: '/operations'
+      fullPath: '/operations'
+      preLoaderRoute: typeof OperationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/overview': {
+      id: '/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof OverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prices': {
+      id: '/prices'
+      path: '/prices'
+      fullPath: '/prices'
+      preLoaderRoute: typeof PricesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/project-tasks': {
+      id: '/project-tasks'
+      path: '/project-tasks'
+      fullPath: '/project-tasks'
+      preLoaderRoute: typeof ProjectTasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pulse': {
+      id: '/pulse'
+      path: '/pulse'
+      fullPath: '/pulse'
+      preLoaderRoute: typeof PulseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reserves': {
+      id: '/reserves'
+      path: '/reserves'
+      fullPath: '/reserves'
+      preLoaderRoute: typeof ReservesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/retro-ai-conf': {
+      id: '/retro-ai-conf'
+      path: '/retro-ai-conf'
+      fullPath: '/retro-ai-conf'
+      preLoaderRoute: typeof RetroAiConfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/streams': {
+      id: '/streams'
+      path: '/streams'
+      fullPath: '/streams'
+      preLoaderRoute: typeof StreamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sync': {
+      id: '/sync'
+      path: '/sync'
+      fullPath: '/sync'
+      preLoaderRoute: typeof SyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/treasury': {
+      id: '/treasury'
+      path: '/treasury'
+      fullPath: '/treasury'
+      preLoaderRoute: typeof TreasuryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/valuation': {
+      id: '/valuation'
+      path: '/valuation'
+      fullPath: '/valuation'
+      preLoaderRoute: typeof ValuationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/$': {
+      id: '/api/$'
+      path: '/api/$'
+      fullPath: '/api/$'
+      preLoaderRoute: typeof ApiSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/': {
+      id: '/courses/'
+      path: '/courses'
+      fullPath: '/courses/'
+      preLoaderRoute: typeof CoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/add-category': {
+      id: '/courses/add-category'
+      path: '/courses/add-category'
+      fullPath: '/courses/add-category'
+      preLoaderRoute: typeof CoursesAddCategoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/add-course': {
+      id: '/courses/add-course'
+      path: '/courses/add-course'
+      fullPath: '/courses/add-course'
+      preLoaderRoute: typeof CoursesAddCourseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/hierarchy': {
+      id: '/courses/hierarchy'
+      path: '/courses/hierarchy'
+      fullPath: '/courses/hierarchy'
+      preLoaderRoute: typeof CoursesHierarchyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/lessons': {
+      id: '/courses/lessons'
+      path: '/courses/lessons'
+      fullPath: '/courses/lessons'
+      preLoaderRoute: typeof CoursesLessonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/notes': {
+      id: '/courses/notes'
+      path: '/courses/notes'
+      fullPath: '/courses/notes'
+      preLoaderRoute: typeof CoursesNotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/only-mind': {
+      id: '/courses/only-mind'
+      path: '/courses/only-mind'
+      fullPath: '/courses/only-mind'
+      preLoaderRoute: typeof CoursesOnlyMindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/onlymind': {
+      id: '/courses/onlymind'
+      path: '/courses/onlymind'
+      fullPath: '/courses/onlymind'
+      preLoaderRoute: typeof CoursesOnlymindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/overview': {
+      id: '/courses/overview'
+      path: '/courses/overview'
+      fullPath: '/courses/overview'
+      preLoaderRoute: typeof CoursesOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/summaries': {
+      id: '/courses/summaries'
+      path: '/courses/summaries'
+      fullPath: '/courses/summaries'
+      preLoaderRoute: typeof CoursesSummariesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/tools': {
+      id: '/courses/tools'
+      path: '/courses/tools'
+      fullPath: '/courses/tools'
+      preLoaderRoute: typeof CoursesToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/': {
+      id: '/notes/'
+      path: '/notes'
+      fullPath: '/notes/'
+      preLoaderRoute: typeof NotesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/onlymind': {
+      id: '/notes/onlymind'
+      path: '/notes/onlymind'
+      fullPath: '/notes/onlymind'
+      preLoaderRoute: typeof NotesOnlymindRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notes/tools': {
+      id: '/notes/tools'
+      path: '/notes/tools'
+      fullPath: '/notes/tools'
+      preLoaderRoute: typeof NotesToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/profile'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/about': {
+      id: '/profile/about'
+      path: '/profile/about'
+      fullPath: '/profile/about'
+      preLoaderRoute: typeof ProfileAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/basic': {
+      id: '/profile/basic'
+      path: '/profile/basic'
+      fullPath: '/profile/basic'
+      preLoaderRoute: typeof ProfileBasicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/education': {
+      id: '/profile/education'
+      path: '/profile/education'
+      fullPath: '/profile/education'
+      preLoaderRoute: typeof ProfileEducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/experience': {
+      id: '/profile/experience'
+      path: '/profile/experience'
+      fullPath: '/profile/experience'
+      preLoaderRoute: typeof ProfileExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/portfolio': {
+      id: '/profile/portfolio'
+      path: '/profile/portfolio'
+      fullPath: '/profile/portfolio'
+      preLoaderRoute: typeof ProfilePortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/projects': {
+      id: '/profile/projects'
+      path: '/profile/projects'
+      fullPath: '/profile/projects'
+      preLoaderRoute: typeof ProfileProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile/skills': {
+      id: '/profile/skills'
+      path: '/profile/skills'
+      fullPath: '/profile/skills'
+      preLoaderRoute: typeof ProfileSkillsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/': {
+      id: '/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof SettingsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/automation': {
+      id: '/settings/automation'
+      path: '/settings/automation'
+      fullPath: '/settings/automation'
+      preLoaderRoute: typeof SettingsAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/drive-config': {
+      id: '/settings/drive-config'
+      path: '/settings/drive-config'
+      fullPath: '/settings/drive-config'
+      preLoaderRoute: typeof SettingsDriveConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/drive-media': {
+      id: '/settings/drive-media'
+      path: '/settings/drive-media'
+      fullPath: '/settings/drive-media'
+      preLoaderRoute: typeof SettingsDriveMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/media': {
+      id: '/settings/media'
+      path: '/settings/media'
+      fullPath: '/settings/media'
+      preLoaderRoute: typeof SettingsMediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/passwords': {
+      id: '/settings/passwords'
+      path: '/settings/passwords'
+      fullPath: '/settings/passwords'
+      preLoaderRoute: typeof SettingsPasswordsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/users': {
+      id: '/settings/users'
+      path: '/settings/users'
+      fullPath: '/settings/users'
+      preLoaderRoute: typeof SettingsUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/$token': {
+      id: '/share/$token'
+      path: '/share/$token'
+      fullPath: '/share/$token'
+      preLoaderRoute: typeof ShareTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks/': {
+      id: '/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks/'
+      preLoaderRoute: typeof TasksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks/overview': {
+      id: '/tasks/overview'
+      path: '/tasks/overview'
+      fullPath: '/tasks/overview'
+      preLoaderRoute: typeof TasksOverviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks/project-tasks': {
+      id: '/tasks/project-tasks'
+      path: '/tasks/project-tasks'
+      fullPath: '/tasks/project-tasks'
+      preLoaderRoute: typeof TasksProjectTasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tasks/todo': {
+      id: '/tasks/todo'
+      path: '/tasks/todo'
+      fullPath: '/tasks/todo'
+      preLoaderRoute: typeof TasksTodoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/uploads/$': {
+      id: '/uploads/$'
+      path: '/uploads/$'
+      fullPath: '/uploads/$'
+      preLoaderRoute: typeof UploadsSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/$': {
+      id: '/api/public/$'
+      path: '/api/public/$'
+      fullPath: '/api/public/$'
+      preLoaderRoute: typeof ApiPublicSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$id/': {
+      id: '/courses/$id/'
+      path: '/courses/$id'
+      fullPath: '/courses/$id/'
+      preLoaderRoute: typeof CoursesIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$id/book': {
+      id: '/courses/$id/book'
+      path: '/courses/$id/book'
+      fullPath: '/courses/$id/book'
+      preLoaderRoute: typeof CoursesIdBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/edit/$id': {
+      id: '/courses/edit/$id'
+      path: '/courses/edit/$id'
+      fullPath: '/courses/edit/$id'
+      preLoaderRoute: typeof CoursesEditIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/materials/': {
+      id: '/courses/materials/'
+      path: '/courses/materials'
+      fullPath: '/courses/materials/'
+      preLoaderRoute: typeof CoursesMaterialsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/materials/lessons': {
+      id: '/courses/materials/lessons'
+      path: '/courses/materials/lessons'
+      fullPath: '/courses/materials/lessons'
+      preLoaderRoute: typeof CoursesMaterialsLessonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/s/$token': {
+      id: '/share/s/$token'
+      path: '/share/s/$token'
+      fullPath: '/share/s/$token'
+      preLoaderRoute: typeof ShareSTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$id/lessons/$lessonId': {
+      id: '/courses/$id/lessons/$lessonId'
+      path: '/courses/$id/lessons/$lessonId'
+      fullPath: '/courses/$id/lessons/$lessonId'
+      preLoaderRoute: typeof CoursesIdLessonsLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/$id/lessons/new': {
+      id: '/courses/$id/lessons/new'
+      path: '/courses/$id/lessons/new'
+      fullPath: '/courses/$id/lessons/new'
+      preLoaderRoute: typeof CoursesIdLessonsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/materials/$id/': {
+      id: '/courses/materials/$id/'
+      path: '/courses/materials/$id'
+      fullPath: '/courses/materials/$id/'
+      preLoaderRoute: typeof CoursesMaterialsIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/materials/$id/lessons/$lessonId': {
+      id: '/courses/materials/$id/lessons/$lessonId'
+      path: '/courses/materials/$id/lessons/$lessonId'
+      fullPath: '/courses/materials/$id/lessons/$lessonId'
+      preLoaderRoute: typeof CoursesMaterialsIdLessonsLessonIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses/materials/$id/lessons/new': {
+      id: '/courses/materials/$id/lessons/new'
+      path: '/courses/materials/$id/lessons/new'
+      fullPath: '/courses/materials/$id/lessons/new'
+      preLoaderRoute: typeof CoursesMaterialsIdLessonsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CreditsRoute: CreditsRoute,
+  DebtsRoute: DebtsRoute,
+  DockRoute: DockRoute,
+  ExportRoute: ExportRoute,
+  FinancialReportsRoute: FinancialReportsRoute,
+  GoldRoute: GoldRoute,
+  IntelligenceRoute: IntelligenceRoute,
+  LeadsRoute: LeadsRoute,
+  LearningRoute: LearningRoute,
+  LoginRoute: LoginRoute,
+  LogsRoute: LogsRoute,
+  MonthsRoute: MonthsRoute,
+  OperationsRoute: OperationsRoute,
+  OverviewRoute: OverviewRoute,
+  PricesRoute: PricesRoute,
+  ProjectTasksRoute: ProjectTasksRoute,
+  ProjectsRoute: ProjectsRoute,
+  PulseRoute: PulseRoute,
+  ReservesRoute: ReservesRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  RetroAiConfRoute: RetroAiConfRoute,
+  StreamsRoute: StreamsRoute,
+  SyncRoute: SyncRoute,
+  TermsRoute: TermsRoute,
+  TimelineRoute: TimelineRoute,
+  TreasuryRoute: TreasuryRoute,
+  ValuationRoute: ValuationRoute,
+  ApiSplatRoute: ApiSplatRoute,
+  CoursesAddCategoryRoute: CoursesAddCategoryRoute,
+  CoursesAddCourseRoute: CoursesAddCourseRoute,
+  CoursesHierarchyRoute: CoursesHierarchyRoute,
+  CoursesLessonsRoute: CoursesLessonsRoute,
+  CoursesNotesRoute: CoursesNotesRoute,
+  CoursesOnlyMindRoute: CoursesOnlyMindRoute,
+  CoursesOnlymindRoute: CoursesOnlymindRoute,
+  CoursesOverviewRoute: CoursesOverviewRoute,
+  CoursesSummariesRoute: CoursesSummariesRoute,
+  CoursesToolsRoute: CoursesToolsRoute,
+  NotesOnlymindRoute: NotesOnlymindRoute,
+  NotesToolsRoute: NotesToolsRoute,
+  ProfileAboutRoute: ProfileAboutRoute,
+  ProfileBasicRoute: ProfileBasicRoute,
+  ProfileEducationRoute: ProfileEducationRoute,
+  ProfileExperienceRoute: ProfileExperienceRoute,
+  ProfilePortfolioRoute: ProfilePortfolioRoute,
+  ProfileProjectsRoute: ProfileProjectsRoute,
+  ProfileSkillsRoute: ProfileSkillsRoute,
+  SettingsAutomationRoute: SettingsAutomationRoute,
+  SettingsDriveConfigRoute: SettingsDriveConfigRoute,
+  SettingsDriveMediaRoute: SettingsDriveMediaRoute,
+  SettingsMediaRoute: SettingsMediaRoute,
+  SettingsPasswordsRoute: SettingsPasswordsRoute,
+  SettingsUsersRoute: SettingsUsersRoute,
+  ShareTokenRoute: ShareTokenRoute,
+  TasksOverviewRoute: TasksOverviewRoute,
+  TasksProjectTasksRoute: TasksProjectTasksRoute,
+  TasksTodoRoute: TasksTodoRoute,
+  UploadsSplatRoute: UploadsSplatRoute,
+  CoursesIndexRoute: CoursesIndexRoute,
+  NotesIndexRoute: NotesIndexRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+  SettingsIndexRoute: SettingsIndexRoute,
+  TasksIndexRoute: TasksIndexRoute,
+  ApiPublicSplatRoute: ApiPublicSplatRoute,
+  CoursesIdBookRoute: CoursesIdBookRoute,
+  CoursesEditIdRoute: CoursesEditIdRoute,
+  CoursesMaterialsLessonsRoute: CoursesMaterialsLessonsRoute,
+  ShareSTokenRoute: ShareSTokenRoute,
+  CoursesIdIndexRoute: CoursesIdIndexRoute,
+  CoursesMaterialsIndexRoute: CoursesMaterialsIndexRoute,
+  CoursesIdLessonsLessonIdRoute: CoursesIdLessonsLessonIdRoute,
+  CoursesIdLessonsNewRoute: CoursesIdLessonsNewRoute,
+  CoursesMaterialsIdIndexRoute: CoursesMaterialsIdIndexRoute,
+  CoursesMaterialsIdLessonsLessonIdRoute:
+    CoursesMaterialsIdLessonsLessonIdRoute,
+  CoursesMaterialsIdLessonsNewRoute: CoursesMaterialsIdLessonsNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

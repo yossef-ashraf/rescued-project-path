@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export default function GlobalActionIndicator() {
     const { t } = useApp();

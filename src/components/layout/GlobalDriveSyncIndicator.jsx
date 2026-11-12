@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Loader2, CheckCircle2, AlertCircle, Cloud, ArrowUpCircle } from 'lucide-react';
 
 export default function GlobalDriveSyncIndicator() {

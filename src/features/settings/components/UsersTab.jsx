@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { UserPlus, Key, Trash2, CheckCircle, XCircle, ShieldCheck, UserCheck, Shield, AlertTriangle, RefreshCw, LogOut } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import ConfirmDeleteModal from '@/components/ui/ConfirmDeleteModal';
 import { fetchUsers, addUser, updateUser, changeUserPassword, deleteUser, logoutAllSessions } from '@/features/settings/api/settings.api.js';
 
@@ -271,14 +271,13 @@ export default function UsersTab() {
                                         </td>
                                         <td className="px-4 py-3.5">
                                             <select
-                                                value={u.role || 'viewer'}
+                                                value={u.role || ''}
                                                 onChange={e => handleUpdateUserRole(u, e.target.value)}
                                                 className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white cursor-pointer focus:outline-none focus:border-[#BC5C29]"
                                             >
-                                                <option value="super_admin">Super Admin</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="editor">Editor</option>
-                                                <option value="viewer">Viewer</option>
+                                                <option value="">{t('No access (pending)', 'بدون صلاحية (بانتظار الموافقة)')}</option>
+                                                <option value="user">{t('Member', 'عضو')}</option>
+                                                <option value="admin">{t('Admin', 'مدير')}</option>
                                             </select>
                                         </td>
                                         <td className="px-4 py-3.5">
@@ -400,10 +399,8 @@ export default function UsersTab() {
                                         onChange={e => setUserForm({ ...userForm, role: e.target.value })}
                                         className="w-full px-4 py-2.5 rounded-2xl bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm font-medium text-zinc-900 dark:text-white focus:outline-none focus:border-[#BC5C29] transition cursor-pointer"
                                     >
-                                        <option value="super_admin">Super Admin</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="editor">Editor</option>
-                                        <option value="viewer">Viewer</option>
+                                        <option value="user">{t('Member', 'عضو')}</option>
+                                        <option value="admin">{t('Admin', 'مدير')}</option>
                                     </select>
                                 </div>
                             </div>

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { BookOpen, ArrowRight, ArrowLeft, ChevronRight, ChevronLeft, Save, Trash2, Globe, ExternalLink, PlayCircle, Printer, Download, Loader2 } from 'lucide-react';
 import AutosaveStatus from './AutosaveStatus.jsx';
 import { ShareButton } from '@/features/sharing';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 import { downloadCoursePdfFile } from '../utils/pdfClientDownload.js';
 

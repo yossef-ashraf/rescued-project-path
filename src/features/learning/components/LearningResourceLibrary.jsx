@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import Link from '@/shared/next-compat/link';
 import { useRouter, useSearchParams } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { announceMatteAlert } from '@/components/ui/MatteAlert';
 import {
     FileText,

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from '@/shared/next-compat/navigation';
 import { ArrowUpRight, Search, LogOut, Settings, Moon, Sun, ChevronLeft, ChevronRight } from 'lucide-react';
 import { DASHBOARD_VERSES_LIST } from '@/shared/enums/index.js';
 import { useWorkspaceItems } from '@/shared/hooks/useWorkspaceItems.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import NotificationCenter from '@/features/notifications/components/NotificationCenter';
 import { ShareButton } from '@/features/sharing';
 import { apiClient } from '@/shared/http/apiClient.js';
@@ -52,6 +52,10 @@ export default function DashboardHubPills() {
         invalidateAuthCache();
         try {
             await apiClient.post('/api/auth/logout', {});
+        } catch (_) {}
+        try {
+            const { supabase } = await import('@/integrations/supabase/client');
+            await supabase.auth.signOut();
         } catch (_) {}
         if (typeof window !== 'undefined') {
             window.location.href = '/login';

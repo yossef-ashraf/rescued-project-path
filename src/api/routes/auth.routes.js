@@ -16,6 +16,9 @@ export const authRoutes = {
   'auth/me': {
     GET: (req) => AuthController.me(req)
   },
+  'auth/session-event': {
+    POST: (req) => AuthController.sessionEvent(req)
+  },
   'auth/send-otp': {
     POST: (req) => AuthController.sendOtp(req)
   }

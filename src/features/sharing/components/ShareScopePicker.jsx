@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { ALLOWED_SCOPES, getScopeLabel } from '../constants/sharing.constants.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function ShareScopePicker({ selectedScope, onSelectScope, className = '' }) {
     const { t, lang } = useApp();

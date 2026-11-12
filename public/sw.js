@@ -24,6 +24,7 @@ self.addEventListener('fetch', (event) => {
   if (
     event.request.method !== 'GET' ||
     url.pathname.startsWith('/api/') ||
+    url.pathname.startsWith('/~oauth') ||
     url.pathname.startsWith('/_next/') ||
     url.hostname === 'localhost' ||
     url.hostname === '127.0.0.1'

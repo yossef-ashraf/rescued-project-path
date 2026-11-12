@@ -30,7 +30,7 @@ import {
     CheckSquare
 } from 'lucide-react';
 import { cn } from '@/shared/utils/utils.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import ShareDurationSelect from './ShareDurationSelect.jsx';
 import { createSharedLink, listSharedLinks, revokeSharedLink } from '@/features/sharing/api/sharing.api.js';
 

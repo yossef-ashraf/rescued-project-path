@@ -3,7 +3,8 @@ import {
     sendTelegramMessage, 
     getTelegramConfig, 
     ensureTelegramWebhook, 
-    handleTelegramWebhookUpdate 
+    handleTelegramWebhookUpdate,
+    verifyTelegramWebhookRequest
 } from '@/features/settings/services/telegram-integration.js';
 import { runReminderCycle } from '@/features/settings/services/reminderScheduler.js';
 import {
@@ -14,49 +15,14 @@ import {
 } from '@/features/settings/services/databaseBackupService.js';
 import { requireAuth, ok, unauthorized, serverError } from '@/shared/utils/response.js';
 import { getServerConfig } from '@/shared/config/server-config.js';
+import { getRequestContext } from '@/shared/database/db-context.server.js';
 
 async function isAuthorizedCron(req, user) {
-    if (user && (user.role === 'admin' || user.id)) return true;
-
-    if (req.headers?.get?.('x-vercel-cron')) return true;
-
-    const userAgent = (req.headers?.get?.('user-agent') || '').toLowerCase();
-    if (userAgent.includes('cron-job.org')) return true;
-
-    const url = new URL(req.url);
-    const queryKey = (
-        url.searchParams.get('key') || 
-        url.searchParams.get('secret') || 
-        url.searchParams.get('cron_secret') || 
-        ''
-    ).trim();
-
-    const serverConfig = getServerConfig();
-    let expectedSecret = serverConfig.cronSecret || serverConfig.apiKey;
-    if (!expectedSecret) {
-        try {
-            const dbSecret = await Setting.findOne({ where: { key: 'CRON_SECRET' }, raw: true });
-            if (dbSecret?.value) expectedSecret = dbSecret.value.trim();
-        } catch (_) {}
-    }
-
-    const validSecrets = [expectedSecret, 'codex_cron_2026'].filter(Boolean);
-
-    if (queryKey && validSecrets.includes(queryKey)) {
-        return true;
-    }
-
-    const cronHeader = req.headers?.get?.('x-cron-secret') || '';
-    const authHeader = req.headers?.get?.('authorization') || '';
-    const bearer = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '';
-    const apiKeyHeader = req.headers?.get?.('x-api-key') || '';
-
-    const candidate = (cronHeader || bearer || apiKeyHeader || queryKey).trim();
-    if (candidate && validSecrets.includes(candidate)) {
-        return true;
-    }
-
-    return false;
+    // Signed-in admins can trigger jobs from the app; scheduled calls are verified by the public
+    // cron route (managed schedule credential or the CRON_SECRET secret) before reaching here.
+    if (user && user.role === 'admin') return true;
+    const ctx = getRequestContext();
+    return Boolean(ctx?.verifiedSystemCaller);
 }
 
 export class CronController {
@@ -76,7 +42,7 @@ export class CronController {
             const proto = req.headers?.get?.('x-forwarded-proto') || 'https';
             const reqOrigin = (host && !host.includes('localhost')) 
                 ? `${proto}://${host}` 
-                : (getServerConfig().baseUrl || 'https://yossef-ashraf.vercel.app');
+                : (getServerConfig().baseUrl || '');
 
             await ensureTelegramWebhook(reqOrigin).catch(err => {
                 console.warn('[Cron] ensureWebhook warning:', err?.message);
@@ -138,7 +104,13 @@ export class CronController {
                 return ok({ success: true, cleanup });
             }
 
-            if (force || req.method === 'POST') {
+            // Scheduled runs (POST {"scheduled": true}) follow the backup schedule saved in settings, as the original daily cron did.
+            let scheduledCall = false;
+            if (req.method === 'POST') {
+                try { scheduledCall = Boolean((await req.clone().json())?.scheduled); } catch { scheduledCall = false; }
+            }
+
+            if (force || (req.method === 'POST' && !scheduledCall)) {
                 const backupResult = await runDatabaseDriveBackup({
                     slotLabel,
                     retentionDays: 2,
@@ -164,10 +136,15 @@ export class CronController {
                 const currentOrigin = (host && !host.includes('localhost')) ? `${proto}://${host}` : `${url.protocol}//${url.host}`;
 
                 if (url.searchParams.get('setup') === 'true' || url.searchParams.get('register') === 'true') {
+                    const caller = await requireAuth(req).catch(() => null);
+                    if (!caller || caller.role !== 'admin') return unauthorized('Admin session required.');
                     const setupResult = await ensureTelegramWebhook(currentOrigin);
                     return ok({ ok: true, status: 'Telegram webhook configured', setupResult });
                 }
                 return ok({ ok: true, status: 'Telegram webhook active' });
+            }
+            if (!(await verifyTelegramWebhookRequest(req))) {
+                return unauthorized('Invalid Telegram webhook secret.');
             }
             const body = await req.json().catch(() => ({}));
             const result = await handleTelegramWebhookUpdate(body);

@@ -4,7 +4,7 @@ import React from 'react';
 import Link from '@/shared/next-compat/link';
 import { Bell, CheckCheck, RefreshCw, Clock, ExternalLink, ShieldAlert, CheckCircle2, Info } from 'lucide-react';
 import { useNotifications } from '@/shared/hooks/useNotifications.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 const TYPE_ICONS = {
     info: Info,

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Clock } from 'lucide-react';
 import { cn } from '@/shared/utils/utils.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export const DURATION_OPTIONS = [
     { value: '5m', labelEn: '5 minutes', labelAr: '5 دقائق', descEn: 'Fast instant preview', descAr: 'للمعاينة الفورية السريعة' },

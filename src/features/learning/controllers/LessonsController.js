@@ -258,7 +258,8 @@ export class LessonsController {
             origin
         });
 
-        if (mode === 'html') {
+        // PDFs are compiled in the browser from this HTML view.
+        if (mode === 'html' || mode === 'download' || mode === 'inline') {
             return new Response(html, {
                 status: 200,
                 headers: {

@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Command, Search, ArrowUpRight, X, WalletCards, CheckSquare2, GraduationCap, UserRound, Settings2 } from 'lucide-react';
 import { useRouter } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 const COMMANDS = [
   { id: 'overview', group: 'Navigate', label: 'Financial overview', arabic: 'نظرة عامة مالية', href: '/', icon: WalletCards },

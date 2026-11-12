@@ -1,4 +1,3 @@
-import { readdir, stat } from 'fs/promises';
 import path from 'path';
 import { Op } from '@/shared/database/orm.js';
 import { GoldAsset, TaskAttachment, MaterialKnowledgeLibrary } from '@/shared/models/index.js';
@@ -8,32 +7,23 @@ import { apiError } from '@/shared/utils/api-error.js';
 
 const ALLOWED_EXTENSIONS = ['.jpeg', '.jpg', '.png', '.pdf', '.svg', '.webp', '.gif', '.zip', '.txt', '.doc', '.docx', '.md', '.css'];
 
-async function scanDirectory(dirPath, relativePrefix = '', filesMap) {
+// Lists files uploaded to the private Lovable Cloud "uploads" bucket (served at /uploads/<name>).
+async function scanCloudUploads(filesMap) {
     try {
-        const entries = await readdir(dirPath, { withFileTypes: true });
-        for (const entry of entries) {
-            const fullPath = path.join(dirPath, entry.name);
-            const relPath = relativePrefix ? `${relativePrefix}/${entry.name}` : entry.name;
-
-            if (entry.isDirectory()) {
-                if (entry.name !== 'icons') {
-                    await scanDirectory(fullPath, relPath, filesMap);
-                }
-            } else if (entry.isFile()) {
+        const { getDbClient } = await import('@/shared/database/db-context.server.js');
+        const bucket = getDbClient().storage.from('uploads');
+        for (let offset = 0; offset < 10000; offset += 1000) {
+            const { data, error } = await bucket.list('', { limit: 1000, offset, sortBy: { column: 'created_at', order: 'desc' } });
+            if (error || !data?.length) break;
+            for (const entry of data) {
+                if (!entry?.name || entry.id === null) continue;
                 const ext = path.extname(entry.name).toLowerCase();
-                const isExcluded = entry.name.endsWith('manifest.json') || entry.name === 'sw.js';
-
-                if (ALLOWED_EXTENSIONS.includes(ext) && !isExcluded) {
-                    const fileStat = await stat(fullPath);
-                    const webPath = `/${relPath.replace(/\\/g, '/')}`;
-                    filesMap.set(webPath, {
-                        name: entry.name,
-                        path: webPath,
-                        source: relativePrefix ? `public/${relativePrefix}` : 'public',
-                        size: `${(fileStat.size / 1024).toFixed(1)} KB`
-                    });
-                }
+                if (!ALLOWED_EXTENSIONS.includes(ext) && ext !== '.mp4') continue;
+                const webPath = `/uploads/${entry.name}`;
+                const size = Number(entry.metadata?.size || 0);
+                filesMap.set(webPath, { name: entry.name, path: webPath, source: 'uploads', size: `${(size / 1024).toFixed(1)} KB` });
             }
+            if (data.length < 1000) break;
         }
     } catch {
     }
@@ -93,9 +83,7 @@ export class DriveController {
             if (!user) return unauthorized('Unauthorized: Authentication required.');
 
             const filesMap = new Map();
-            const publicDir = path.join(process.cwd(), 'public');
-
-            await scanDirectory(publicDir, '', filesMap);
+            await scanCloudUploads(filesMap);
 
             try {
                 const driveConfig = await getGoogleDriveConfig();

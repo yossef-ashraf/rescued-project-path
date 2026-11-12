@@ -100,6 +100,24 @@ export const shareRoutes = {
     }
   },
 
+  'public/share/resolve': {
+    GET: async (req) => {
+      try {
+        const { searchParams } = new URL(req.url);
+        const token = searchParams.get('token');
+        if (!token) return badRequest('رمز المشاركة مطلوب');
+        const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || '';
+        const userAgent = req.headers.get('user-agent') || '';
+        const result = await resolveSharedLink(token, { ip, userAgent });
+        if (!result.valid) return notFound(result.reason || 'الرابط غير صالح');
+        return successResponse(result);
+      } catch (err) {
+        console.error('[API Share Resolve] Error:', err);
+        return badRequest('تعذر معالجة رابط المشاركة');
+      }
+    }
+  },
+
   'public/share/:token': {
     GET: async (req, ctx) => {
       try {

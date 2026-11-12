@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Bookmark, Plus, Trash2, ExternalLink, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function LessonResources({ resources = [], onAdd, onDelete, contentDir = 'rtl' }) {
     const { t, lang } = useApp();

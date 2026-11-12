@@ -100,9 +100,11 @@ export class ExportController {
                 const financeWhere = {};
                 if (year) financeWhere.year = parseInt(year, 10);
                 if (month) {
-                    financeWhere[Op.and] = [
-                        sequelize.where(sequelize.fn('LOWER', sequelize.col('month')), month.toLowerCase())
-                    ];
+                    // Months are stored as numbers (1-12); accept a number or an English month name.
+                    const MONTHS = ['january','february','march','april','may','june','july','august','september','october','november','december'];
+                    const raw = String(month).trim().toLowerCase();
+                    const idx = /^\d+$/.test(raw) ? parseInt(raw, 10) : MONTHS.findIndex((m) => m.startsWith(raw.slice(0, 3))) + 1;
+                    if (idx >= 1 && idx <= 12) financeWhere.month = idx;
                 }
 
                 const [debts, credits] = await Promise.all([

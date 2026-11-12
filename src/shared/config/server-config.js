@@ -29,8 +29,7 @@ export function getRequiredServerConfig() {
     const config = getServerConfig();
     const missing = [];
 
-    if (!config.databaseUrl) missing.push('DATABASE_URL');
-    if (!config.authSecret) missing.push('AUTH_SECRET');
+    // The database and sign-in now run on Lovable Cloud; only the vault salt is still required.
     if (!config.vaultKeySalt) missing.push('VAULT_KEY_SALT');
 
     if (missing.length > 0) {

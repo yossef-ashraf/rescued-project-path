@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useRouter } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { X, CheckSquare, WalletCards, Users, FileText, BookOpen, Wrench } from 'lucide-react';
 
 const actions = [

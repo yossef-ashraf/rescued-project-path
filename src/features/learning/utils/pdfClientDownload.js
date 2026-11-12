@@ -16,81 +16,41 @@ export async function downloadCoursePdfFile({
     if (lessonId && String(lessonId).trim() !== '' && lessonId !== 'all') {
         params.set('lessonId', String(lessonId));
     }
-    params.set('mode', 'download');
+    params.set('mode', 'html');
 
     const url = `/api/learning/courses/${encodeURIComponent(courseId)}/pdf?${params.toString()}`;
     let response;
     try {
-        response = await fetch(url, {
-            method: 'GET',
-            credentials: 'same-origin',
-            cache: 'no-store',
-            headers: { Accept: 'application/pdf' }
-        });
+        response = await fetch(url, { method: 'GET', credentials: 'same-origin', cache: 'no-store', headers: { Accept: 'text/html' } });
     } catch (error) {
         if (fallbackElement) return downloadElementAsPdf(fallbackElement, fallbackFileName);
         throw error;
     }
-
     if (!response.ok) {
-        let errorMessage = `Failed to generate PDF (HTTP ${response.status})`;
-        try {
-            const errJson = await response.json();
-            if (errJson?.error || errJson?.message) {
-                errorMessage = errJson.error || errJson.message;
-            }
-        } catch {
-            // ignore json parse error
-        }
         if (fallbackElement) return downloadElementAsPdf(fallbackElement, fallbackFileName);
-        throw new Error(errorMessage);
+        throw new Error(`Failed to generate PDF (HTTP ${response.status})`);
     }
+    const html = await response.text();
+    return downloadHtmlAsPdf(html, fallbackFileName);
+}
 
-    let resolvedFileName = fallbackFileName;
-    const customHeaderName = response.headers.get('X-Export-Filename');
-    if (customHeaderName) {
-        try {
-            resolvedFileName = decodeURIComponent(customHeaderName);
-        } catch {
-            resolvedFileName = customHeaderName;
-        }
-    } else {
-        const disposition = response.headers.get('Content-Disposition') || '';
-        const utf8Match = disposition.match(/filename\*=UTF-8''([^;]+)/i);
-        if (utf8Match && utf8Match[1]) {
-            try {
-                resolvedFileName = decodeURIComponent(utf8Match[1].trim());
-            } catch {
-                resolvedFileName = utf8Match[1].trim();
-            }
-        }
+/** Compiles a full HTML document (styles included) into a downloaded PDF in the browser. */
+export async function downloadHtmlAsPdf(html, fileName = 'document.pdf') {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const host = document.createElement('div');
+    host.setAttribute('dir', doc.documentElement.getAttribute('dir') || 'rtl');
+    host.style.cssText = 'position:fixed;left:-10000px;top:0;width:794px;background:#fff;color:#111;';
+    doc.querySelectorAll('style').forEach((st) => host.appendChild(st.cloneNode(true)));
+    const body = document.createElement('div');
+    body.innerHTML = doc.body ? doc.body.innerHTML : html;
+    host.appendChild(body);
+    document.body.appendChild(host);
+    try {
+        if (document.fonts?.ready) await document.fonts.ready;
+        return await downloadElementAsPdf(body, fileName);
+    } finally {
+        host.remove();
     }
-
-    if (!resolvedFileName.toLowerCase().endsWith('.pdf')) {
-        resolvedFileName = `${resolvedFileName}.pdf`;
-    }
-
-    const blob = await response.blob();
-    const pdfBlob = new Blob([blob], { type: 'application/pdf' });
-    const blobUrl = window.URL.createObjectURL(pdfBlob);
-
-    const anchor = document.createElement('a');
-    anchor.href = blobUrl;
-    anchor.download = resolvedFileName;
-    anchor.style.display = 'none';
-    document.body.appendChild(anchor);
-    anchor.click();
-
-    window.setTimeout(() => {
-        try {
-            document.body.removeChild(anchor);
-        } catch {
-            // ignore
-        }
-        window.URL.revokeObjectURL(blobUrl);
-    }, 3000);
-
-    return true;
 }
 
 /**

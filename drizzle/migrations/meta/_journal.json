@@ -8,6 +8,13 @@
       "when": 1794486068203,
       "tag": "0000_orbit_workspace_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794486989549,
+      "tag": "0001_migration",
+      "breakpoints": true
     }
   ]
 }

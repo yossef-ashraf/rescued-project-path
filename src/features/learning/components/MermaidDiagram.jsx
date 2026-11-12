@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useId } from 'react';
 import { GitBranch, Code2, Check, AlertCircle, Copy, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 
 function sanitizeSvgMarkup(markup) {

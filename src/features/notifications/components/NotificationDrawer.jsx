@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from '@/shared/next-compat/navigation';
 import { Bell, ChevronDown, ChevronUp, CheckCheck } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { useNotifications, useNotificationDrawer } from '@/shared/hooks/useNotifications.js';
 
 export default function NotificationDrawer() {

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Code2, Copy, Check, Play, Terminal, FileText } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 const SUPPORTED_LANGUAGES = [
     { value: 'javascript', label: 'JavaScript' },

@@ -4,7 +4,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { ProjectDetailView } from '@/features/operations/components/ProjectDetailView';
 import ConfirmDeleteModal from '@/components/ui/ConfirmDeleteModal';
 import { PageDashboardSkeleton } from '@/components/ui/Skeleton';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Edit2, Trash2, Folder } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { fetchProjects, createProject, updateProject, addProjectComment, deleteProject } from '@/features/operations/api/projects.api.js';

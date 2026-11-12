@@ -21,7 +21,7 @@ import {
     Check,
     ArrowRight
 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import MermaidDiagram from './MermaidDiagram.jsx';
 
 export function FlowchartCanvas({

@@ -14,7 +14,7 @@ import {
     Layers,
     Link as LinkIcon
 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function LessonToolbar({
     onInsert,

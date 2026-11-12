@@ -1,22 +1,20 @@
 const rateLimitMap = new Map();
 
-if (typeof setInterval !== 'undefined') {
-    const timer = setInterval(() => {
-        const now = Date.now();
-        for (const [key, timestamps] of rateLimitMap.entries()) {
-            const valid = timestamps.filter(t => t > now - 900000);
-            if (valid.length === 0) {
-                rateLimitMap.delete(key);
-            } else {
-                rateLimitMap.set(key, valid);
-            }
-        }
-    }, 300000);
-    if (timer && timer.unref) timer.unref();
+let lastPrune = 0;
+// Hosted server code may not start timers at load time, so stale entries are pruned during calls.
+function pruneStale(now) {
+    if (now - lastPrune < 300000) return;
+    lastPrune = now;
+    for (const [key, timestamps] of rateLimitMap.entries()) {
+        const valid = timestamps.filter(t => t > now - 900000);
+        if (valid.length === 0) rateLimitMap.delete(key);
+        else rateLimitMap.set(key, valid);
+    }
 }
 
 export function checkRateLimit(key, maxRequests = 10, windowMs = 60000) {
     const now = Date.now();
+    pruneStale(now);
     const windowStart = now - windowMs;
 
     const existing = rateLimitMap.get(key) || [];

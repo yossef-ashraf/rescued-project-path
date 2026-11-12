@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { getAuthSession, invalidateAuthCache } from '@/features/auth/services/sessionCache.js';
 import DesktopSidebar from './DesktopSidebar';
 import MobileWorkspaceHeader from './MobileWorkspaceHeader';
@@ -18,7 +18,7 @@ const emptySubscribe = () => () => {};
 
 export function AppShell({ children }) {
     const pathname = usePathname();
-    const isLoginPage = pathname === '/login' || pathname === '/features/auth/pages/login';
+    const isLoginPage = pathname === '/login' || pathname === '/reset-password' || pathname === '/features/auth/pages/login';
     const isPublicSharePage = pathname?.startsWith('/share/') || pathname?.startsWith('/features/sharing/pages/share/');
     const isPublicPage = isLoginPage || isPublicSharePage;
     const isDocumentWorkspace = pathname?.includes('/book') || pathname?.includes('/lessons/');

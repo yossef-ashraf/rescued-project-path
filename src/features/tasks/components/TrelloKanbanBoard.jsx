@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { cn } from "@/shared/utils/utils.js";
-import { useApp } from "@/shared/context/AppContext.js";
+import { useApp } from "@/shared/context/AppContext.jsx";
 import { moveTaskBetweenColumns } from "@/features/tasks/services/board-reducer.js";
 
 export function TrelloKanbanBoard({

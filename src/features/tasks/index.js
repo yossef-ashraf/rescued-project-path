@@ -1,5 +1,5 @@
-export { default as ToDoCard } from './components/ToDoCard';
-export { default as TrelloKanbanBoard } from './components/TrelloKanbanBoard';
+export { TodoCard as ToDoCard } from './components/ToDoCard';
+export { TrelloKanbanBoard } from './components/TrelloKanbanBoard';
 export { default as TasksDashboardView } from './components/TasksDashboardView';
 export { default as TasksOverviewView } from './components/TasksOverviewView';
 export { default as TasksTodoView } from './components/TasksTodoView';

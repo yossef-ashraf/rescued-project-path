@@ -22,7 +22,7 @@ import {
     ShieldAlert
 } from 'lucide-react';
 import { cn } from '@/shared/utils/utils.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 function formatRemainingTime(seconds, lang = 'en') {
     if (seconds === null) return '...';
@@ -62,7 +62,7 @@ export default function PublicShareView() {
                 if (res.ok) {
                     return res.json();
                 }
-                const fallback = await fetch(`/api/share/resolve?token=${encodeURIComponent(token)}`);
+                const fallback = await fetch(`/api/public/share/resolve?token=${encodeURIComponent(token)}`);
                 const fbData = await fallback.json();
                 if (fbData?.success && fbData?.data?.valid) {
                     return fbData.data;

@@ -5,7 +5,7 @@ import { cn } from '@/shared/utils/utils.js';
 import { EquationBlock } from './EquationBlock';
 import { Button } from '@/components/ui/button';
 import { Save, CheckCircle2, CloudUpload, AlertCircle, Plus, Trash2 } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function LessonEditor({
     lessonId,

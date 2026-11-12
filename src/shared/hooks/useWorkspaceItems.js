@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 
 export function useWorkspaceItems() {
     const { t } = useApp();

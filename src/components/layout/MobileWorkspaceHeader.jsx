@@ -4,7 +4,7 @@ import React from 'react';
 import Link from '@/shared/next-compat/link';
 import Image from '@/shared/next-compat/image';
 import { usePathname } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { WORKSPACES, isWorkspaceActive } from './WorkspaceSwitcher';
 import NotificationCenter from '@/features/notifications/components/NotificationCenter';
 import { Sun, Moon, Menu, Search } from 'lucide-react';
@@ -36,7 +36,7 @@ export function MobileWorkspaceHeader({ onOpenDrawer }) {
                 <Link href="/" className="flex items-center gap-2 min-w-0">
                     <div className="relative w-7 h-7 shrink-0 flex items-center justify-center rounded-lg bg-line2/80 border border-line/70">
                         <Image
-                            src="/logos/image.png"
+                            src="/logo-mark.svg"
                             alt="Orbit Logo"
                             width={22}
                             height={22}

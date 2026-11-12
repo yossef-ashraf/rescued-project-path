@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from '@/shared/next-compat/navigation';
 import { ArrowLeft, Folder, Layers, Loader2, AlertCircle } from 'lucide-react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { announceMatteAlert } from '@/components/ui/MatteAlert';
 import { fetchCourseCategories, createCategory } from '@/features/learning/api/addCategory.api.js';
 import { Button } from '@/components/ui/button';

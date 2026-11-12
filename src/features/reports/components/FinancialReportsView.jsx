@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useMemo } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Table, LayoutGrid, ChevronDown, ChevronRight, TrendingUp, TrendingDown, RefreshCw, DollarSign, Wallet, Shield, Layers, HelpCircle } from 'lucide-react';
 import { fetchFinancialReportsData } from '@/features/reports/api/financialReports.api.js';
 import { processMonthsData, getCurrentSheetRows } from '@/features/reports/utils/financialReports.logic.js';

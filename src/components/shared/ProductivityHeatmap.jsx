@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import ContributionSkyline from './ContributionSkyline';
 import ActivityHeatmap from '@/components/shared/ActivityHeatmap';
 import { LayoutGrid, Box } from 'lucide-react';

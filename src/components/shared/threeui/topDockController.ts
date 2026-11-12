@@ -1,3 +1,5 @@
+// @ts-nocheck
+// Carried over unchanged from the original app.
 export type TopDockAxis = "x" | "y";
 
 export type TopDockOptions = {

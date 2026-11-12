@@ -1,10 +1,3 @@
-import fs from 'fs';
-import os from 'os';
-import path from 'path';
-import { execFile } from 'child_process';
-import { promisify } from 'util';
-
-const execFileAsync = promisify(execFile);
 
 /* ============================================================================
  * 1. LOGO & HELPER UTILITIES
@@ -13,18 +6,8 @@ const execFileAsync = promisify(execFile);
 let cachedLogoDataUri = null;
 
 function getLogoDataUri() {
-    if (cachedLogoDataUri) return cachedLogoDataUri;
-    try {
-        const logoPath = path.join(process.cwd(), 'public', 'logos', 'image.png');
-        if (fs.existsSync(logoPath)) {
-            const buf = fs.readFileSync(logoPath);
-            cachedLogoDataUri = `data:image/png;base64,${buf.toString('base64')}`;
-            return cachedLogoDataUri;
-        }
-    } catch {
-        // ignore
-    }
-    return '';
+    // Served from the app's public assets; the PDF is compiled in the browser.
+    return '/logo-mark.svg';
 }
 
 function escapeHtml(str) {
@@ -1983,66 +1966,13 @@ export function buildCoursePdfHtmlView({
 }
 
 /* ============================================================================
- * 8. NATIVE VECTOR PDF COMPILER VIA HEADLESS CHROMIUM / EDGE
+ * 8. PDF COMPILATION
+ * The hosted runtime has no headless browser, so the HTML view is returned to the
+ * browser, which compiles the PDF (see features/learning/utils/pdfClientDownload.js).
  * ============================================================================ */
 
-function findSystemChromiumBinary() {
-    const candidates = [
-        process.env.CHROME_BIN,
-        'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-        'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-        'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-        'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
-        '/usr/bin/google-chrome',
-        '/usr/bin/chromium-browser',
-        '/usr/bin/chromium'
-    ].filter(Boolean);
-
-    for (const bin of candidates) {
-        try {
-            if (fs.existsSync(bin)) return bin;
-        } catch {
-            // ignore
-        }
-    }
-    return null;
-}
-
-export async function renderHtmlViewToPdfBuffer(htmlContent) {
-    const browserBin = findSystemChromiumBinary();
-    if (!browserBin) {
-        throw new Error('No Chromium/Chrome/Edge binary found for native vector PDF generation.');
-    }
-
-    const uid = `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-    const tmpHtmlPath = path.join(os.tmpdir(), `orbit_doc_${uid}.html`);
-    const tmpPdfPath = path.join(os.tmpdir(), `orbit_doc_${uid}.pdf`);
-
-    try {
-        fs.writeFileSync(tmpHtmlPath, htmlContent, 'utf8');
-
-        await execFileAsync(browserBin, [
-            '--headless=new',
-            '--disable-gpu',
-            '--no-sandbox',
-            '--disable-dev-shm-usage',
-            '--no-pdf-header-footer',
-            `--print-to-pdf=${tmpPdfPath}`,
-            tmpHtmlPath
-        ], { timeout: 45000 });
-
-        if (!fs.existsSync(tmpPdfPath)) {
-            throw new Error('Chromium completed without producing output PDF file.');
-        }
-
-        const pdfBuffer = fs.readFileSync(tmpPdfPath);
-        return pdfBuffer;
-    } finally {
-        try {
-            if (fs.existsSync(tmpHtmlPath)) fs.unlinkSync(tmpHtmlPath);
-        } catch {}
-        try {
-            if (fs.existsSync(tmpPdfPath)) fs.unlinkSync(tmpPdfPath);
-        } catch {}
-    }
+export async function renderHtmlViewToPdfBuffer() {
+    const err = new Error('Server-side PDF rendering is not available; the browser compiles the PDF.');
+    err.status = 501;
+    throw err;
 }

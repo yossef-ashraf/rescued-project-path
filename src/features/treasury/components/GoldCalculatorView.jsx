@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState, useMemo } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Plus, Search, Edit3, Trash2, Coins, TrendingUp, TrendingDown, Eye, X, Image as ImageIcon, Scale, Wallet, RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SubCommentsInput from '@/features/treasury/components/SubCommentsInput';

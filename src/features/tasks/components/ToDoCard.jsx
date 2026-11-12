@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Pencil } from "lucide-react";
-import { useApp } from "@/shared/context/AppContext.js";
+import { useApp } from "@/shared/context/AppContext.jsx";
 import { getEgyptDateStr, getEgyptTimeStr, getEgyptNowMins } from "@/shared/utils/timezone.js";
 
 const CONFETTI_COLORS = ["#10b981", "#34d399", "#059669", "#a7f3d0", "#6ee7b7"];

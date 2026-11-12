@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Link from '@/shared/next-compat/link';
 import { useSearchParams, useRouter } from '@/shared/next-compat/navigation';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import {
     User, Users, Info, Briefcase, GraduationCap, Folder, Code, MessageSquare,
     Edit3, Trash2, Paperclip, ExternalLink, GripVertical, ArrowUp, ArrowDown,

@@ -9,7 +9,7 @@ import ConfirmDeleteModal from '@/components/ui/ConfirmDeleteModal';
 import { PageDashboardSkeleton } from '@/components/ui/Skeleton';
 import { announceMatteAlert } from '@/components/ui/MatteAlert';
 import { updateTaskStatusInList } from '@/features/tasks/services/board-reducer.js';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 
 import {

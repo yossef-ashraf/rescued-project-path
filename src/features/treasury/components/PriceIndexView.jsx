@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState, useMemo } from 'react';
-import { useApp } from '@/shared/context/AppContext.js';
+import { useApp } from '@/shared/context/AppContext.jsx';
 import { Plus, Search, Edit3, Trash2, RefreshCw, Coins, Clock, DollarSign, CircleDollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { fetchFinancePrices, saveFinancePrice, deleteFinancePrice, syncGoldServicePrice } from '@/features/treasury/api/prices.api.js';
