@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="27 53 197 104" fill="none">
+  <g fill="#a35649">
+    <!-- Letter Y: Branches & Chamfer Cut Stem -->
+    <path d="M 31 70 H 49 L 71.5 100 L 94 70 H 112 L 79 113 V 134 L 64 148 V 113 Z" />
+    <!-- Central Architectural Divider Line -->
+    <line x1="122" y1="55" x2="122" y2="155" stroke="#a35649" stroke-width="2.4" stroke-linecap="square" />
+    <!-- Letter A: Left Diagonal & Right Stencil Leg -->
+    <path d="M 176 71 L 132 148 H 149 L 176 100 Z" />
+    <path d="M 176 71 L 220 148 H 165 L 173 134 H 197 L 176 100 Z" />
+  </g>
+</svg>
