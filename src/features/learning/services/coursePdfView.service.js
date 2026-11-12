@@ -741,7 +741,7 @@ function renderLessonChapterHtml({
                     <span class="brand-name">ORBIT SYSTEMS</span>
                 </div>
                 <div class="brand-right" dir="rtl">
-                    ${escapeHtml(course.title)} • المحاضرة #${lessonNum}
+                    ${escapeHtml(course.title)} • المحاضرة ${lessonNum}
                 </div>
             </div>
 
@@ -749,7 +749,7 @@ function renderLessonChapterHtml({
             <header class="lecture-banner">
                 <div class="lecture-meta-row">
                     <div class="lecture-badges">
-                        <span class="badge-primary">المحاضرة #${lessonNum}</span>
+                        <span class="badge-primary">المحاضرة ${lessonNum}</span>
                         <span class="badge-Outline">${escapeHtml(course.title)}</span>
                     </div>
                     <div class="lecture-stats">

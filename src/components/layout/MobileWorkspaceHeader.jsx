@@ -11,48 +11,41 @@ import { Sun, Moon, Menu, Search } from 'lucide-react';
 
 export function MobileWorkspaceHeader({ onOpenDrawer }) {
     const pathname = usePathname();
-    const { lang, theme, toggleTheme, toggleLang } = useApp();
+    const { lang, theme, toggleTheme } = useApp();
     const isAr = lang === 'ar';
     const isLight = theme === 'light' || theme === 'mode-light';
 
     const currentWorkspace = WORKSPACES.find((ws) => isWorkspaceActive(ws, pathname)) || WORKSPACES[0];
     const wsTitle = isAr ? currentWorkspace.labelAr : currentWorkspace.labelEn;
 
+    const iconBtn = 'ui-btn ui-btn-ghost ui-btn-icon size-10 text-ink';
+
     return (
         <header
             suppressHydrationWarning
-            className="mobile-topbar lg:hidden flex items-center justify-between px-4 h-14 bg-surface/95 backdrop-blur-xl border-b border-line sticky top-0 z-40 shrink-0"
+            className="mobile-topbar lg:hidden sticky top-0 z-40 shrink-0 flex items-center justify-between gap-2 h-14 px-2 bg-surface/90 backdrop-blur-xl border-b border-line"
         >
-            <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center gap-1 min-w-0 flex-1">
                 <button
                     type="button"
                     onClick={onOpenDrawer}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-ink hover:bg-line2 active:scale-95 transition-colors cursor-pointer shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                    aria-label={isAr ? 'فتح قائمة التنقل' : 'Toggle navigation drawer'}
-                    title={isAr ? 'فتح قائمة التنقل' : 'Toggle navigation drawer'}
+                    className={iconBtn}
+                    aria-label={isAr ? 'فتح قائمة التنقل' : 'Open navigation'}
                 >
-                    <Menu className="h-5 w-5" />
+                    <Menu className="!size-5" />
                 </button>
-                <Link href="/" className="flex items-center gap-2 min-w-0">
-                    <div className="relative w-7 h-7 shrink-0 flex items-center justify-center rounded-lg bg-line2/80 border border-line/70">
-                        <Image
-                            src="/logo-mark.svg"
-                            alt="Orbit Logo"
-                            width={22}
-                            height={22}
-                            priority
-                            className="w-5 h-5 object-contain select-none"
-                        />
-                    </div>
-                    <div className="flex items-center gap-1.5 truncate">
-                        <span className="text-[13px] font-extrabold text-primary tracking-tight">ORBIT</span>
-                        <span className="text-inkMuted text-[12px]" aria-hidden="true">/</span>
-                        <span className="text-[13px] font-semibold text-ink truncate">{wsTitle}</span>
-                    </div>
+                <Link href="/" className="flex items-center gap-2 min-w-0 rounded-lg px-1 py-1">
+                    <span className="size-7 shrink-0 grid place-items-center rounded-lg bg-line2 ring-1 ring-line">
+                        <Image src="/logo-mark.svg" alt="" width={20} height={20} priority className="size-4.5 object-contain select-none" />
+                    </span>
+                    <span className="flex flex-col min-w-0 leading-none">
+                        <span className="text-[10px] font-bold tracking-[0.14em] text-primary">ORBIT</span>
+                        <span className="mt-0.5 text-[15px] font-semibold text-ink truncate">{wsTitle}</span>
+                    </span>
                 </Link>
             </div>
 
-            <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center gap-0.5 shrink-0">
                 <button
                     type="button"
                     onClick={() => {
@@ -61,29 +54,18 @@ export function MobileWorkspaceHeader({ onOpenDrawer }) {
                             window.dispatchEvent(new CustomEvent('orbit:open-command-palette'));
                         }
                     }}
-                    aria-label={isAr ? 'البحث السريع (Ctrl+K)' : 'Quick Search (Ctrl+K)'}
-                    title={isAr ? 'البحث السريع (Ctrl+K)' : 'Quick Search (Ctrl+K)'}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-inkMuted hover:text-ink hover:bg-line2 transition-colors cursor-pointer"
+                    aria-label={isAr ? 'البحث السريع' : 'Quick search'}
+                    className={iconBtn}
                 >
-                    <Search className="h-4 w-4" />
-                </button>
-                <button
-                    type="button"
-                    onClick={toggleLang}
-                    aria-label={isAr ? 'Switch language to English' : 'تغيير اللغة إلى العربية'}
-                    title={isAr ? 'Switch to English' : 'التحويل للعربية'}
-                    className="inline-flex h-11 min-w-[44px] px-2.5 items-center justify-center rounded-xl text-[11px] font-bold border border-line bg-surface text-inkMuted hover:text-ink hover:bg-line2 transition-colors cursor-pointer"
-                >
-                    {isAr ? 'EN' : 'عربي'}
+                    <Search className="!size-[18px]" />
                 </button>
                 <button
                     type="button"
                     onClick={toggleTheme}
-                    aria-label={isLight ? (isAr ? 'تفعيل الوضع الداكن' : 'Switch to Dark Mode') : (isAr ? 'تفعيل الوضع الفاتح' : 'Switch to Light Mode')}
-                    title={isLight ? 'Dark Mode' : 'Light Mode'}
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-inkMuted hover:text-ink hover:bg-line2 transition-colors cursor-pointer"
+                    aria-label={isLight ? (isAr ? 'الوضع الداكن' : 'Dark mode') : (isAr ? 'الوضع الفاتح' : 'Light mode')}
+                    className={iconBtn}
                 >
-                    {isLight ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                    {isLight ? <Moon className="!size-[18px]" /> : <Sun className="!size-[18px]" />}
                 </button>
                 <NotificationCenter />
             </div>

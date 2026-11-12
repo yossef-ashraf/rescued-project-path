@@ -26,11 +26,12 @@ export function inferFieldWidth({ key = '', type = '' } = {}) {
     return 'md';
 }
 
+// Field geometry comes from the global field rules / .ui-input-wrp in styles.css; state only adds intent.
 export const stateBorder = {
-    default: 'border-[#E5E7EB] dark:border-zinc-800 focus:border-primary focus:ring-2 focus:ring-primary/25',
-    error: 'border-crit focus:border-crit focus:ring-2 focus:ring-crit/25',
-    warning: 'border-warn focus:border-warn focus:ring-2 focus:ring-warn/25',
-    success: 'border-ok focus:border-ok focus:ring-2 focus:ring-ok/25',
+    default: '',
+    error: '',
+    warning: '',
+    success: '',
 };
 
 export function FieldShell({ label, hint, error, warning, success, required, width = 'full', className, children }) {
@@ -56,21 +57,14 @@ export function FieldShell({ label, hint, error, warning, success, required, wid
     return (
         <div className={cn('w-full', fieldWidth[width] || fieldWidth.full, className)}>
             {label && (
-                <label htmlFor={generatedId} className="mb-1.5 flex items-center justify-between gap-2 text-[13px] font-semibold text-ink2">
-                    <span>
-                        {label}
-                        {required && <span className="ms-0.5 text-crit" aria-hidden="true">*</span>}
-                    </span>
-                    {required && (
-                        <span className="text-[10.5px] font-semibold text-crit/90 bg-crit/10 px-1.5 py-0.5 rounded-md">
-                            مطلوب
-                        </span>
-                    )}
+                <label htmlFor={generatedId} className="ui-label mb-1.5">
+                    {label}
+                    {required && <sup className="ms-0.5 font-semibold text-crit" aria-hidden="true">*</sup>}
                 </label>
             )}
             {typeof children === 'function' ? children(stateBorder[state], a11yProps) : children}
             {msg && (
-                <p id={msgId} role={error ? 'alert' : undefined} className={cn('mt-1 text-[12px]', msgColor)}>
+                <p id={msgId} role={error ? 'alert' : undefined} className={cn('mt-1.5 text-[12.5px] leading-snug', msgColor)}>
                     {msg}
                 </p>
             )}
@@ -99,7 +93,7 @@ export function Txt({ label, hint, error, warning, success, required, width = 'm
                     value={value}
                     title={resolvedTitle}
                     className={cn(
-                        'min-h-[48px] sm:min-h-[44px] w-full rounded-[12px] border bg-surface px-4 text-[13.5px] text-ink placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted transition-colors',
+                        'w-full px-3 text-sm',
                         borderCls,
                         inputClassName
                     )}
@@ -114,15 +108,16 @@ export function Money({ label, currency = 'USD', hint, error, required, width = 
     return (
         <FieldShell label={label} hint={hint} error={error} required={required} width={width} className={className}>
             {(borderCls, a11yProps) => (
-                <div className={cn('flex min-h-[48px] sm:min-h-[44px] w-full items-center overflow-hidden rounded-[12px] border bg-surface focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/25', borderCls)}>
-                    <span className="select-none border-e border-line bg-line2 px-3 text-[12px] font-medium text-muted h-full flex items-center">
+                <div className="ui-input-wrp" data-invalid={Boolean(error) || undefined}>
+                    <span className="ui-input-affix select-none border-e border-line bg-line2 text-xs font-medium">
                         {currency}
                     </span>
                     <input
                         {...a11yProps}
                         type="number"
                         step="0.01"
-                        className="h-full w-full bg-transparent px-3 text-[13.5px] tabular-nums text-ink focus:outline-none"
+                        inputMode="decimal"
+                        className="ui-input tabular-nums !ps-3"
                         {...props}
                     />
                 </div>
@@ -135,14 +130,15 @@ export function Phone({ label, dialCode = '+20', hint, error, required, width = 
     return (
         <FieldShell label={label} hint={hint} error={error} required={required} width={width} className={className}>
             {(borderCls, a11yProps) => (
-                <div className={cn('flex min-h-[48px] sm:min-h-[44px] w-full items-center overflow-hidden rounded-[12px] border bg-surface focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/25', borderCls)}>
-                    <span className="select-none border-e border-line bg-line2 px-3 text-[12px] font-medium tabular-nums text-muted h-full flex items-center">
+                <div className="ui-input-wrp" data-invalid={Boolean(error) || undefined} dir="ltr">
+                    <span className="ui-input-affix select-none border-e border-line bg-line2 text-xs font-medium tabular-nums">
                         {dialCode}
                     </span>
                     <input
                         {...a11yProps}
                         type="tel"
-                        className="h-full w-full bg-transparent px-3 text-[13.5px] tabular-nums text-ink focus:outline-none"
+                        inputMode="tel"
+                        className="ui-input tabular-nums !ps-3"
                         {...props}
                     />
                 </div>
@@ -159,7 +155,7 @@ export function Area({ label, hint, error, required, width = 'xl', rows = 3, cla
                     {...a11yProps}
                     rows={rows}
                     className={cn(
-                        'w-full rounded-[12px] border bg-surface px-4 py-2.5 text-[13.5px] text-ink placeholder:text-faint focus:outline-none disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted transition-colors',
+                        'w-full px-3 py-2 text-sm resize-y',
                         borderCls
                     )}
                     {...props}
@@ -185,7 +181,7 @@ export function Sel({ label, hint, error, required, width = 'mini', options = []
                     value={value}
                     title={selectedLabel}
                     className={cn(
-                        'min-h-[48px] sm:min-h-[44px] w-full rounded-[12px] border bg-surface px-3.5 text-[13.5px] text-ink focus:outline-none disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted transition-colors truncate',
+                        'w-full ps-3 text-sm truncate cursor-pointer',
                         borderCls
                     )}
                     {...props}
@@ -296,7 +292,7 @@ export const Input = React.forwardRef(({ className, type = 'text', value, title,
             type={type}
             value={value}
             title={resolvedTitle}
-            className={cn('form-input min-h-[48px] sm:min-h-[44px] px-4 rounded-xl', className)}
+            className={cn('form-input px-3', className)}
             {...props}
         />
     );
@@ -310,7 +306,7 @@ export const PasswordInput = React.forwardRef(({ className, ...props }, ref) => 
             <input
                 ref={ref}
                 type={show ? 'text' : 'password'}
-                className={cn('form-input min-h-[48px] sm:min-h-[44px] px-4 pe-10 rounded-xl', className)}
+                className={cn('form-input px-3 pe-10', className)}
                 {...props}
             />
             <button
@@ -335,7 +331,7 @@ export const SearchInput = React.forwardRef(({ className, ...props }, ref) => (
         <input
             ref={ref}
             type="search"
-            className={cn('form-input min-h-[48px] sm:min-h-[44px] ps-9 pe-4 rounded-xl', className)}
+            className={cn('form-input ps-9 pe-3', className)}
             placeholder="Search..."
             {...props}
         />
@@ -344,7 +340,7 @@ export const SearchInput = React.forwardRef(({ className, ...props }, ref) => (
 SearchInput.displayName = 'SearchInput';
 
 export const NumberInput = React.forwardRef(({ className, ...props }, ref) => (
-    <input ref={ref} type="number" className={cn('form-input min-h-[48px] sm:min-h-[44px] px-4 rounded-xl tabular-nums', className)} {...props} />
+    <input ref={ref} type="number" className={cn('form-input px-3 tabular-nums', className)} {...props} />
 ));
 NumberInput.displayName = 'NumberInput';
 
@@ -355,18 +351,18 @@ export const Checkbox = React.forwardRef(({ label, className, disabled, ...props
                 ref={ref}
                 type="checkbox"
                 disabled={disabled}
-                className={cn('form-checkbox', className)}
+                className={cn('ui-checkbox', className)}
                 {...props}
             />
         );
     }
     return (
-        <label className={cn('inline-flex items-center gap-2 select-none text-[13px] min-h-[44px]', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer')}>
+        <label className={cn('inline-flex items-center gap-2 select-none text-sm min-h-9', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer')}>
             <input
                 ref={ref}
                 type="checkbox"
                 disabled={disabled}
-                className={cn('form-checkbox', className)}
+                className={cn('ui-checkbox', className)}
                 {...props}
             />
             <span className="text-ink">{label}</span>
@@ -388,7 +384,7 @@ export const Radio = React.forwardRef(({ label, className, disabled, ...props },
         );
     }
     return (
-        <label className={cn('inline-flex items-center gap-2 select-none text-[13px] min-h-[44px]', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer')}>
+        <label className={cn('inline-flex items-center gap-2 select-none text-sm min-h-9', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer')}>
             <input
                 ref={ref}
                 type="radio"

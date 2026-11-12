@@ -1,18 +1,31 @@
-// Sign-in, sign-up, password reset and sign-out now happen in the browser through Lovable Cloud auth.
+// Sign-in uses one-time codes (email or Telegram) exchanged for a Lovable Cloud session.
 // The server keeps the session-info, sign-in history and "sign out everywhere" endpoints.
 import { AuthLog, User } from '@/shared/models/index.js';
 import { Op } from '@/shared/database/orm.js';
 import { getClientIp, getUserAgent, recordAuthLog, getAuthenticatedUser } from '@/features/auth/services/auth.js';
 import { ok, unauthorized, forbidden, serverError, badRequest } from '@/shared/utils/response.js';
 import { getRequestContext, withPrivilegedDb, getDbClient } from '@/shared/database/db-context.server.js';
+import { sendLoginCode, verifyLoginCode } from '@/features/auth/services/otp-login.server.js';
+
+function codeResponse(result) {
+    if (result.ok) return ok(result.data);
+    const status = result.status || 400;
+    return Response.json({ ok: false, data: null, error: result.error, message: result.error }, { status });
+}
 
 export class AuthController {
-    static async login() {
-        return badRequest('Sign in with your email and password on the sign-in page.', null, 'USE_CLOUD_AUTH');
+    /** Step 2 of code sign-in: verify the code, return a Lovable Cloud session. */
+    static async login(req) {
+        const body = await req.json().catch(() => ({}));
+        const result = await verifyLoginCode({ login: body.login, code: body.otp, channel: body.channel, ip: getClientIp(req), userAgent: getUserAgent(req) });
+        return codeResponse(result);
     }
 
-    static async sendOtp() {
-        return badRequest('One-time codes were replaced by email and password sign-in.', null, 'USE_CLOUD_AUTH');
+    /** Step 1 of code sign-in: send a 6-digit code by email or Telegram. */
+    static async sendOtp(req) {
+        const body = await req.json().catch(() => ({}));
+        const result = await sendLoginCode({ login: body.destination, channel: body.channel === 'email' ? 'email' : 'telegram', origin: new URL(req.url).origin, ip: getClientIp(req), userAgent: getUserAgent(req) });
+        return codeResponse(result);
     }
 
     static async me(req) {

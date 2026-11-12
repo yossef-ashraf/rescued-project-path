@@ -7,11 +7,11 @@ import { useApp } from '@/shared/context/AppContext.jsx';
 import { cn } from '@/shared/utils/utils.js';
 import { WORKSPACES, isWorkspaceActive } from './WorkspaceSwitcher';
 import { Sheet } from '@/components/ui/Sheet';
-import { MoreHorizontal, Menu } from 'lucide-react';
+import { MoreHorizontal, Menu, Languages } from 'lucide-react';
 
 export function MobileBottomNavigation({ onOpenMenu }) {
     const pathname = usePathname();
-    const { lang } = useApp();
+    const { lang, toggleLang } = useApp();
     const isAr = lang === 'ar';
     const [isMoreOpen, setIsMoreOpen] = useState(false);
 
@@ -28,7 +28,7 @@ export function MobileBottomNavigation({ onOpenMenu }) {
                 aria-label={isAr ? 'شريط التنقل السفلي' : 'Mobile Bottom Navigation'}
                 className="mobile-nav lg:hidden fixed inset-x-0 bottom-0 z-45 bg-surface/95 backdrop-blur-xl border-t border-line pb-[env(safe-area-inset-bottom,0px)]"
             >
-                <div className="flex items-center justify-around min-h-[68px] px-2 py-1.5">
+                <div className="flex items-stretch justify-around px-1.5 py-1">
                     {primaryWorkspaces.map((ws) => {
                         const active = isWorkspaceActive(ws, pathname);
                         const Icon = ws.icon;
@@ -40,13 +40,14 @@ export function MobileBottomNavigation({ onOpenMenu }) {
                                 href={ws.legacyPath || ws.path}
                                 aria-current={active ? 'page' : undefined}
                                 className={cn(
-                                    'flex flex-col items-center justify-center flex-1 min-h-[48px] min-w-[48px] py-1 px-1 rounded-xl text-[11px] font-medium transition-all select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40',
+                                    'relative flex flex-col items-center justify-center gap-1 flex-1 min-h-[52px] min-w-0 px-1 rounded-lg text-[11px] font-medium transition-colors duration-75 select-none',
                                     active
-                                        ? 'text-primary font-extrabold bg-primary/10'
-                                        : 'text-inkMuted hover:text-ink hover:bg-line2/60'
+                                        ? 'text-primary font-semibold'
+                                        : 'text-muted hover:text-ink hover:bg-line2'
                                 )}
                             >
-                                <Icon className={cn('h-5 w-5 mb-0.5 shrink-0', active && 'stroke-[2.5]')} />
+                                {active && <span aria-hidden="true" className="absolute top-0 inset-x-1/4 h-0.5 rounded-full bg-primary" />}
+                                <Icon className={cn('h-5 w-5 shrink-0', active && 'stroke-[2.25]')} />
                                 <span className="truncate max-w-[72px] leading-tight">{label}</span>
                             </Link>
                         );
@@ -59,13 +60,14 @@ export function MobileBottomNavigation({ onOpenMenu }) {
                         aria-expanded={isMoreOpen}
                         aria-label={isAr ? 'المزيد من الأقسام' : 'More workspaces'}
                         className={cn(
-                            'flex flex-col items-center justify-center flex-1 min-h-[48px] min-w-[48px] py-1 px-1 rounded-xl text-[11px] font-medium transition-all select-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40',
+                            'relative flex flex-col items-center justify-center gap-1 flex-1 min-h-[52px] min-w-0 px-1 rounded-lg text-[11px] font-medium transition-colors duration-75 select-none cursor-pointer',
                             isMoreActive
-                                ? 'text-primary font-extrabold bg-primary/10'
-                                : 'text-inkMuted hover:text-ink hover:bg-line2/60'
+                                ? 'text-primary font-semibold'
+                                : 'text-muted hover:text-ink hover:bg-line2'
                         )}
                     >
-                        <MoreHorizontal className="h-5 w-5 mb-0.5 shrink-0" />
+                        {isMoreActive && <span aria-hidden="true" className="absolute top-0 inset-x-1/4 h-0.5 rounded-full bg-primary" />}
+                        <MoreHorizontal className="h-5 w-5 shrink-0" />
                         <span className="truncate max-w-[72px] leading-tight">{isAr ? 'المزيد' : 'More'}</span>
                     </button>
                 </div>
@@ -92,16 +94,16 @@ export function MobileBottomNavigation({ onOpenMenu }) {
                                     aria-current={active ? 'page' : undefined}
                                     onClick={() => setIsMoreOpen(false)}
                                     className={cn(
-                                        'flex items-center gap-3 p-3 min-h-[48px] rounded-xl border text-[13px] font-medium transition-all',
+                                        'flex items-center gap-3 p-2.5 min-h-[52px] rounded-lg ring-1 text-[13px] font-medium transition-colors duration-75',
                                         active
-                                            ? 'border-primary/50 bg-primary/10 text-primary font-semibold'
-                                            : 'border-line bg-surfaceMuted/50 text-ink hover:bg-surfaceMuted'
+                                            ? 'ring-primary/50 bg-primary/10 text-primary font-semibold'
+                                            : 'ring-line bg-surface text-ink hover:bg-line2'
                                     )}
                                 >
                                     <div
                                         className={cn(
-                                            'p-2 rounded-lg shrink-0',
-                                            active ? 'bg-primary text-white' : 'bg-surface text-inkMuted'
+                                            'p-2 rounded-md shrink-0',
+                                            active ? 'bg-primary text-on-primary' : 'bg-line2 text-muted'
                                         )}
                                     >
                                         <Icon className="h-4 w-4" />
@@ -112,19 +114,25 @@ export function MobileBottomNavigation({ onOpenMenu }) {
                         })}
                     </div>
 
-                    {typeof onOpenMenu === 'function' && (
-                        <button
-                            type="button"
-                            onClick={() => {
-                                setIsMoreOpen(false);
-                                onOpenMenu();
-                            }}
-                            className="w-full flex items-center justify-center gap-2 min-h-[48px] px-4 py-2.5 rounded-xl border border-line bg-surface text-ink font-semibold text-[13px] hover:bg-line2 transition-colors cursor-pointer"
-                        >
-                            <Menu className="h-4 w-4 text-primary" />
-                            <span>{isAr ? 'فتح قائمة الصفحات التفصيلية' : 'Open Full Page Navigation Drawer'}</span>
+                    <div className="grid grid-cols-2 gap-2.5 pt-1">
+                        <button type="button" onClick={toggleLang} className="ui-btn ui-btn-gray ui-btn-lg">
+                            <Languages />
+                            <span>{isAr ? 'English' : 'العربية'}</span>
                         </button>
-                    )}
+                        {typeof onOpenMenu === 'function' && (
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setIsMoreOpen(false);
+                                    onOpenMenu();
+                                }}
+                                className="ui-btn ui-btn-gray ui-btn-lg"
+                            >
+                                <Menu />
+                                <span>{isAr ? 'كل الصفحات' : 'All pages'}</span>
+                            </button>
+                        )}
+                    </div>
                 </div>
             </Sheet>
         </>

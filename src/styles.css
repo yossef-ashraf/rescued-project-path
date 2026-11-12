@@ -35,6 +35,11 @@
   --color-crit: var(--md-crit);
   --shadow-card: var(--md-shadow-card);
   --shadow-pop: var(--md-shadow-pop);
+  /* Aliases used by learning/sharing screens (never defined in the original app). */
+  --color-inkMuted: var(--md-muted);
+  --color-inkSecondary: var(--md-ink2);
+  --color-surfaceMuted: var(--md-line2);
+  --color-lineStrong: var(--ds-border-strong);
 }
 
 :root {
@@ -267,20 +272,46 @@ aside.app-sidebar {
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.30);
 }
 
-input:not([type="checkbox"]):not([type="radio"]),
-select:not([data-badge-select="true"]):not([class*="rounded-full"]),
-textarea {
-  background-color: var(--ds-surface-1);
-  border: 1px solid var(--ds-border);
-  color: var(--ds-text-1);
+/* ── Native fields: one Filament-style geometry everywhere (rounded-lg, 1px ring, shadow-sm, 2px focus ring).
+   Unlayered on purpose so legacy per-page border/background utilities can't drift from the system.
+   Opt out with .ui-input (inside .ui-input-wrp), data-bare, or a transparent background utility. */
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="hidden"]), select, textarea):not(.ui-input):not([data-bare]):not([data-badge-select="true"]):not([class*="bg-transparent"]):not([class*="opacity-0"]):not([class*="sr-only"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--md-surface);
+  color: var(--md-ink);
+  border: 0;
+  border-radius: 0.5rem;
+  box-shadow: var(--ctl-shadow), inset 0 0 0 1px var(--ctl-ring);
+  min-height: 2.25rem;
+  line-height: 1.5rem;
+  transition: box-shadow 75ms ease, background-color 75ms ease;
+  outline: none;
 }
-
-.dark input:not([type="checkbox"]):not([type="radio"]),
-.dark select:not([data-badge-select="true"]):not([class*="rounded-full"]),
-.dark textarea {
-  background-color: var(--ds-surface-3);
-  border: 1px solid var(--ds-border);
-  color: var(--ds-text-1);
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]), select, textarea):not(.ui-input):not([data-bare]):not([data-badge-select="true"]):not([class*="bg-transparent"]):focus {
+  box-shadow: var(--ctl-shadow), inset 0 0 0 2px var(--md-primary);
+}
+:where(input, select, textarea)[aria-invalid="true"]:not(.ui-input) {
+  box-shadow: var(--ctl-shadow), inset 0 0 0 1px var(--md-crit);
+}
+:where(input, select, textarea):disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  background-color: var(--md-line2);
+}
+::placeholder { color: var(--md-faint); opacity: 1; }
+select:not([data-badge-select="true"]):not([multiple]):not([size]) {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2371717A' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.6rem center;
+  background-repeat: no-repeat;
+  background-size: 1.1em 1.1em;
+  padding-inline-end: 2.25rem;
+}
+[dir="rtl"] select:not([data-badge-select="true"]):not([multiple]):not([size]) {
+  background-position: left 0.6rem center;
+}
+.dark :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea):not(.ui-input):not([data-bare]):not([data-badge-select="true"]):not([class*="bg-transparent"]) {
+  background-color: rgb(255 255 255 / 0.05);
 }
 
 select option {
@@ -361,10 +392,13 @@ svg.recharts-surface {
     min-width: 44px;
   }
 
-  input:not([type="checkbox"]):not([type="radio"]),
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
   select,
   textarea {
-    font-size: 16px;
+    font-size: 16px !important;
+  }
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]), select):not(.ui-input):not([data-bare]):not([class*="bg-transparent"]) {
+    min-height: 2.75rem;
   }
 
   button,
@@ -502,14 +536,11 @@ svg.recharts-surface {
   min-height: 48px;
 }
 
-button:not([disabled]),
-a {
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background-color 160ms ease;
-}
-
-button:not([disabled]):active,
-a:active {
-  transform: scale(0.98);
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--ctl-focus);
+  outline-offset: 2px;
 }
 
 .matte-alert-region {
@@ -843,31 +874,6 @@ a:active {
   color: var(--md-muted);
 }
 
-.app-content input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.app-content select:not([data-badge-select="true"]):not([class*="rounded-full"]),
-.app-content textarea {
-  border-radius: 0.75rem !important;
-  min-height: 44px;
-  box-shadow: none !important;
-  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-@media (max-width: 639px) {
-  .app-content input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-  .app-content select:not([data-badge-select="true"]):not([class*="rounded-full"]) {
-    min-height: 48px;
-    padding-inline: 1rem;
-  }
-}
-
-.app-content input:focus,
-.app-content select:focus,
-.app-content textarea:focus {
-  outline: none;
-  border-color: #BC5C29 !important;
-  box-shadow: 0 0 0 3px rgba(188, 92, 41, 0.18) !important;
-}
-
 button:focus-visible,
 a:focus-visible,
 [role="button"]:focus-visible,
@@ -970,14 +976,21 @@ html, body {
    Standardizes border-radius across buttons, controls, inputs, and cards.
    Eliminates forced 9999px overrides to ensure geometric consistency.
    ========================================================================== */
-button:not(.rounded-none):not(.rounded-lg):not(.rounded-md):not(.rounded-sm):not(.rounded-full):not([class*="rounded-"]),
+button:not([class*="rounded-"]),
 input[type="button"]:not([class*="rounded-"]),
 input[type="submit"]:not([class*="rounded-"]),
 input[type="reset"]:not([class*="rounded-"]),
 div[role="button"]:not([class*="rounded-"]),
 span[role="button"]:not([class*="rounded-"]),
 .orbit-btn {
-  border-radius: 0.75rem; /* Unified 12px (rounded-xl) */
+  border-radius: 0.5rem; /* Filament rounded-lg */
+}
+
+/* Text buttons share one geometry: pills and oversized radii collapse to rounded-lg.
+   Round icon buttons (no horizontal padding) and switches keep their shape. */
+button:not([role="switch"]):not([role="tab"]):is([class*="rounded-full"], [class*="rounded-xl"], [class*="rounded-2xl"], [class*="rounded-3xl"], [class*="rounded-["]):is([class*="px-"], [class*="ps-"]),
+a:is([class*="rounded-full"], [class*="rounded-xl"], [class*="rounded-2xl"]):is([class*="px-"]):is([class*="py-"]) {
+  border-radius: 0.5rem;
 }
 
 /* Explicit pill classes only when intentionally requested */
@@ -986,14 +999,6 @@ span[role="button"]:not([class*="rounded-"]),
 .btn-pill,
 .pill-btn {
   border-radius: 9999px;
-}
-
-/* Smooth active button click feel */
-button:active,
-[role="button"]:active,
-.orbit-btn:active {
-  transform: scale(0.98);
-  transition: transform 0.1s ease;
 }
 
 /* ==========================================================================
@@ -1072,83 +1077,26 @@ button:active,
 
 .orbit-input {
   width: 100%;
-  border-radius: 0.75rem !important;
-  border: 1px solid #e4e4e7;
-  background-color: #ffffff;
-  padding: 0.625rem 1rem;
-  font-size: 0.8125rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: #18181b;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-.dark .orbit-input {
-  border-color: #27272a;
-  background-color: rgba(24, 24, 27, 0.7);
-  color: #ffffff;
-}
-
-.orbit-input:focus {
-  outline: none;
-  border-color: #BC5C29 !important;
-  box-shadow: 0 0 0 3px rgba(188, 92, 41, 0.14) !important;
 }
 
 /* ==========================================================================
    ORBIT UNIFIED DESIGN SYSTEM (TAILWIND @apply)
    ========================================================================== */
 @layer components {
-  /* Buttons */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all bg-primary text-on-primary hover:bg-primary-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 h-9 px-4 text-[13px] shadow-xs cursor-pointer;
-  }
-  .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all border border-line bg-surface text-ink hover:bg-line2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 h-9 px-4 text-[13px] cursor-pointer;
-  }
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all border border-line bg-transparent text-ink hover:bg-line2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 h-9 px-4 text-[13px] cursor-pointer;
-  }
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all bg-transparent text-muted hover:bg-line2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 h-9 px-3 text-[13px] cursor-pointer;
-  }
-  .btn-danger {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all bg-crit text-white hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crit/25 disabled:pointer-events-none disabled:opacity-50 h-9 px-4 text-[13px] shadow-xs cursor-pointer;
-  }
-  .btn-icon {
-    @apply inline-flex items-center justify-center rounded-xl transition-all text-muted hover:bg-line2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 h-8 w-8 p-0 shrink-0 cursor-pointer;
-  }
-  .btn-loading {
-    @apply pointer-events-none opacity-75 cursor-wait;
-  }
-  .btn-disabled {
-    @apply pointer-events-none opacity-50 cursor-not-allowed;
-  }
+  /* Legacy .btn-* names share the .ui-btn rules below (Orbit controls). */
+  .btn-loading { @apply pointer-events-none opacity-75 cursor-wait; }
+  .btn-disabled { @apply pointer-events-none opacity-50 cursor-not-allowed; }
 
-  /* Form & Input Elements */
-  .form-input {
-    @apply h-9 w-full rounded-xl border border-line bg-surface px-3 text-[13px] text-ink placeholder:text-faint focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted transition-colors;
-  }
-  .form-textarea {
-    @apply w-full rounded-xl border border-line bg-surface px-3 py-2 text-[13px] text-ink placeholder:text-faint focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted transition-colors;
-  }
-  .form-select {
-    @apply h-9 w-full rounded-xl border border-line bg-surface px-2.5 text-[13px] text-ink focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted transition-colors;
-  }
-  .form-label {
-    @apply mb-1.5 block text-[13px] font-semibold text-ink2 select-none;
-  }
-  .form-hint {
-    @apply mt-1 text-[12px] text-muted leading-normal;
-  }
-  .form-error {
-    @apply mt-1 text-[12px] text-crit leading-normal font-medium;
-  }
-  .form-checkbox {
-    @apply h-4 w-4 rounded border-line text-primary focus:ring-2 focus:ring-primary/25 focus:ring-offset-0 bg-surface cursor-pointer;
-  }
-  .form-radio {
-    @apply h-4 w-4 rounded-full border-line text-primary focus:ring-2 focus:ring-primary/25 focus:ring-offset-0 bg-surface cursor-pointer;
-  }
+  .form-input, .form-select { @apply w-full text-sm text-ink; }
+  .form-textarea { @apply w-full py-2 text-sm text-ink; }
+  .form-label { @apply mb-1.5 block text-sm font-medium text-ink select-none; }
+  .form-hint { @apply mt-1 text-[12px] text-muted leading-normal; }
+  .form-error { @apply mt-1 text-[12px] text-crit leading-normal font-medium; }
+  .form-checkbox, .form-radio { @apply size-4 cursor-pointer accent-primary; }
+  .form-radio { @apply rounded-full; }
 
   /* Cards & Surfaces */
   .ds-card {
@@ -1391,11 +1339,11 @@ button:active,
   .orbit-task-input { @apply h-10 w-full rounded-xl border border-line bg-surface px-3 text-sm text-ink placeholder:text-faint transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted; }
   .orbit-task-select { @apply h-10 w-full rounded-xl border border-line bg-surface px-3 text-sm text-ink transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted; }
   .orbit-task-textarea { @apply min-h-24 w-full resize-y rounded-xl border border-line bg-surface px-3 py-2.5 text-sm leading-relaxed text-ink placeholder:text-faint transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:bg-line2 disabled:text-muted; }
-  .orbit-task-btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
-  .orbit-task-btn-primary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
-  .orbit-task-btn-secondary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-line bg-surface px-4 text-sm font-semibold text-ink transition-colors hover:bg-line2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
-  .orbit-task-btn-danger { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-crit px-4 text-sm font-semibold text-white transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crit/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
-  .orbit-task-btn-success { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-ok px-4 text-sm font-semibold text-white transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ok/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
+  .orbit-task-btn { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
+  .orbit-task-btn-primary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
+  .orbit-task-btn-secondary { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-line bg-surface px-4 text-sm font-semibold text-ink transition-colors hover:bg-line2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
+  .orbit-task-btn-danger { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-crit px-4 text-sm font-semibold text-white transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-crit/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
+  .orbit-task-btn-success { @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-lg bg-ok px-4 text-sm font-semibold text-white transition-colors hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ok/25 disabled:pointer-events-none disabled:opacity-50 cursor-pointer; }
   .orbit-task-btn-icon { @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-line2 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/25 cursor-pointer; }
   .orbit-task-chip { @apply inline-flex items-center gap-1 rounded-full border border-line bg-line2 px-2.5 py-1 text-[11px] font-semibold text-ink2; }
   .orbit-task-empty { @apply rounded-xl border border-dashed border-line bg-surface/50 px-4 py-8 text-center text-sm text-muted; }
@@ -1408,4 +1356,157 @@ button:active,
   .orbit-task-btn-icon { min-height: 44px; min-width: 44px; }
   .orbit-task-section, .orbit-task-card { @apply p-3; }
   .orbit-task-toolbar { @apply gap-2 p-2; }
+}
+
+/* ───────────────────────── Orbit controls (Filament geometry) ─────────────────────────
+   Buttons: inline-grid, rounded-lg, px-3 py-2, text-sm semibold, shadow-sm + 1px ring, 75ms.
+   Fields:  .ui-input-wrp (ring + focus-within ring-2) holding a bare .ui-input. */
+:root {
+  --ctl-ring: color-mix(in oklab, var(--md-ink) 10%, transparent);
+  --ctl-ring-strong: color-mix(in oklab, var(--md-ink) 20%, transparent);
+  --ctl-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ctl-focus: color-mix(in oklab, var(--md-primary) 50%, transparent);
+  --ctl-hover: color-mix(in oklab, var(--md-ink) 4%, var(--md-surface));
+}
+.dark {
+  --ctl-ring: rgb(255 255 255 / 0.2);
+  --ctl-ring-strong: rgb(255 255 255 / 0.3);
+  --ctl-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --ctl-hover: rgb(255 255 255 / 0.1);
+}
+
+@layer base {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+@layer components {
+  .ui-btn, .btn-primary, .btn-secondary, .btn-outline, .btn-ghost, .btn-danger, .btn-icon {
+    position: relative;
+    display: inline-grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    white-space: nowrap;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 75ms ease, color 75ms ease, box-shadow 75ms ease, opacity 75ms ease;
+  }
+  :is(.ui-btn, .btn-primary, .btn-secondary, .btn-outline, .btn-ghost, .btn-danger, .btn-icon) svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+  .ui-btn:focus-visible { outline: none; box-shadow: var(--ctl-shadow), 0 0 0 2px var(--ctl-focus); }
+  .ui-btn:disabled, .ui-btn[aria-disabled="true"] { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+
+  .ui-btn-gray, .btn-secondary, .btn-outline { background: var(--md-surface); color: var(--md-ink); box-shadow: var(--ctl-shadow), 0 0 0 1px var(--ctl-ring); }
+  .ui-btn-gray:hover, .btn-secondary:hover, .btn-outline:hover { background: var(--ctl-hover); }
+  .dark .ui-btn-gray { background: rgb(255 255 255 / 0.05); }
+  .dark .ui-btn-gray:hover { background: rgb(255 255 255 / 0.1); }
+  .ui-btn-gray:focus-visible { box-shadow: var(--ctl-shadow), 0 0 0 2px var(--ctl-focus); }
+  .ui-btn-gray[aria-pressed="true"], input:checked + .ui-btn-gray { background: var(--md-ink); color: var(--md-surface); box-shadow: var(--ctl-shadow); }
+
+  .ui-btn-primary, .btn-primary { background: var(--md-primary); color: var(--md-on-primary); box-shadow: var(--ctl-shadow); }
+  .ui-btn-primary:hover, .btn-primary:hover { background: var(--md-primary-strong); }
+  .ui-btn-solid { background: var(--md-ink); color: var(--md-surface); box-shadow: var(--ctl-shadow); }
+  .ui-btn-solid:hover { opacity: 0.9; }
+  .ui-btn-danger, .btn-danger { background: var(--md-crit); color: var(--md-on-primary); box-shadow: var(--ctl-shadow); }
+  .ui-btn-danger:hover, .btn-danger:hover { filter: brightness(0.92); }
+  .ui-btn-ghost, .btn-ghost, .btn-icon { background: transparent; color: var(--md-muted); }
+  .ui-btn-ghost:hover, .btn-ghost:hover, .btn-icon:hover { background: var(--md-line2); color: var(--md-ink); }
+  .ui-btn-link { background: transparent; color: var(--md-primary); padding-inline: 0.25rem; }
+  .ui-btn-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  .ui-btn-xs { gap: 0.25rem; padding: 0.375rem 0.5rem; font-size: 0.75rem; line-height: 1rem; }
+  .ui-btn-sm { gap: 0.25rem; padding: 0.375rem 0.625rem; font-size: 0.8125rem; }
+  .ui-btn-lg { padding: 0.625rem 0.875rem; }
+  .ui-btn-xl { padding: 0.625rem 1rem; font-size: 0.9rem; }
+  .ui-btn-icon, .btn-icon { padding: 0.5rem; }
+  .ui-btn-icon.ui-btn-sm { padding: 0.375rem; }
+
+  .ui-field { display: grid; gap: 0.5rem; min-width: 0; }
+  .ui-label { display: block; font-size: 0.875rem; line-height: 1.5rem; font-weight: 500; color: var(--md-ink); }
+
+  .ui-input-wrp {
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+    border-radius: 0.5rem;
+    background: var(--md-surface);
+    box-shadow: var(--ctl-shadow), 0 0 0 1px var(--ctl-ring);
+    transition: box-shadow 75ms ease;
+    overflow: hidden;
+  }
+  .dark .ui-input-wrp { background: rgb(255 255 255 / 0.05); }
+  .ui-input-wrp:focus-within { box-shadow: var(--ctl-shadow), 0 0 0 2px var(--md-primary); }
+  .ui-input-wrp[data-invalid="true"] { box-shadow: var(--ctl-shadow), 0 0 0 1px var(--md-crit); }
+  .ui-input-wrp[data-invalid="true"]:focus-within { box-shadow: var(--ctl-shadow), 0 0 0 2px var(--md-crit); }
+  .ui-input-wrp[data-disabled="true"] { background: var(--md-line2); opacity: 0.7; }
+  .ui-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: var(--md-ink);
+    outline: none;
+    box-shadow: none;
+  }
+  .ui-input::placeholder { color: var(--md-faint); }
+  .ui-input:disabled { cursor: not-allowed; }
+  .ui-input-affix { display: flex; align-items: center; gap: 0.5rem; padding-inline: 0.75rem; color: var(--md-faint); font-size: 0.875rem; white-space: nowrap; }
+  .ui-input-affix + .ui-input { padding-inline-start: 0; }
+
+  .ui-checkbox {
+    appearance: none;
+    width: 1rem; height: 1rem;
+    border-radius: 0.25rem;
+    background: var(--md-surface);
+    box-shadow: var(--ctl-shadow), inset 0 0 0 1px var(--ctl-ring-strong);
+    display: inline-grid; place-content: center;
+    cursor: pointer;
+    transition: background-color 75ms ease, box-shadow 75ms ease;
+  }
+  .ui-checkbox:checked {
+    background: var(--md-primary);
+    box-shadow: none;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+  }
+  .ui-checkbox:focus-visible { outline: 2px solid var(--ctl-focus); outline-offset: 2px; }
+
+  .ui-badge {
+    display: inline-flex; align-items: center; gap: 0.375rem; min-width: 0;
+    border-radius: 0.375rem; padding: 0.25rem 0.5rem;
+    font-size: 0.75rem; font-weight: 500; color: var(--md-ink2);
+    background: var(--md-line2); box-shadow: inset 0 0 0 1px var(--ctl-ring);
+  }
+
+  .ui-notice {
+    display: flex; align-items: flex-start; gap: 0.625rem;
+    border-radius: 0.5rem; padding: 0.75rem 0.875rem;
+    font-size: 0.8125rem; line-height: 1.35rem; font-weight: 500;
+    color: var(--md-ink2); background: var(--md-line2);
+    box-shadow: inset 0 0 0 1px var(--ctl-ring);
+  }
+  .ui-notice svg { margin-top: 0.15rem; }
+  .ui-notice-danger { color: var(--md-crit); background: color-mix(in oklab, var(--md-crit) 8%, var(--md-surface)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--md-crit) 25%, transparent); }
+  .ui-notice-success { color: var(--md-ok); background: color-mix(in oklab, var(--md-ok) 8%, var(--md-surface)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--md-ok) 25%, transparent); }
+}
+
+@media (max-width: 768px) {
+  .ui-btn { min-height: 2.5rem; }
+  .ui-btn-xs, .ui-btn-sm { min-height: 2.25rem; }
+  .ui-input { font-size: 16px; }
+  .ui-input-wrp { min-height: 2.75rem; }
 }
