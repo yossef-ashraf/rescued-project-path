@@ -28,3 +28,11 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Original Orbit pages/controllers are reused as-is: route files in `src/routes` wrap them with `src/shared/next-compat/*` (Next.js API adapters) — keeps the migrated code close to the source.
+- All app data goes through `/api/*` (`src/api/server-entry.server.js`), which resolves the caller's Cloud session and runs controllers with a request-scoped database client (`src/shared/database`); `/api/public/*` is only for share links, Telegram and schedules, each verifying its caller.
+- `src/shared/database/orm.js` is a Sequelize-compatible layer over the Cloud client; raw SQL is not supported — add features there instead of raw queries.
+- Pages render in the browser (`defaultSsr: false`) because original components read browser state during render.
+- Uploaded files not sent to Google Drive live in the private `uploads` bucket, served by `src/routes/uploads.$.ts`.

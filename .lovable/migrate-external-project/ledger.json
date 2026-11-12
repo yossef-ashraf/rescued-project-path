@@ -1,21 +1,22 @@
 {
   "source": "code-archive (Next.js 16 'Orbit' workspace: Postgres via Sequelize, custom HMAC session auth with OTP)",
   "capabilities": [
-    {"capability": "code: pages and UI (operations, tasks, treasury, learning, profile, settings, sharing, reports, notifications)", "source": "app/**", "outcome": "port to TanStack Start routes at the same URLs", "status": "in_progress", "next_action": "copy components and map every page to a route"},
-    {"capability": "code: API (/api/* dispatcher with ~24 route groups)", "source": "app/api/**", "outcome": "single splat server route reusing the original dispatcher and controllers", "status": "in_progress", "next_action": "wire dispatcher to Lovable Cloud auth and data"},
-    {"capability": "schema (41 Sequelize models / 49 migrations)", "source": "app/shared/models, app/shared/migrations", "outcome": "migrate to Lovable Cloud Postgres", "status": "in_progress", "next_action": "generate final schema from models"},
-    {"capability": "records", "source": "Neon/Postgres (DATABASE_URL)", "outcome": "migrate", "status": "pending", "next_action": "request per-table CSV/JSON exports after preview"},
-    {"capability": "auth identities", "source": "users table (scrypt passwords + email/telegram OTP)", "outcome": "migrate to Lovable Cloud auth; first-login email verification + new password", "status": "pending", "next_action": "request users export (id, name, email, username, role, status)"},
-    {"capability": "authorization (admin/user roles, workspace-wide data)", "source": "users.role", "outcome": "user_roles table + RLS for workspace members", "status": "in_progress", "next_action": "implement"},
-    {"capability": "uploaded file bytes (local storage/uploads + Google Drive)", "source": "UploadController", "outcome": "Google Drive preserved; local fallback moves to Lovable Cloud storage", "status": "in_progress", "next_action": "existing local files need re-upload if any"},
-    {"capability": "Google Drive integration", "source": "settings rows (client id/secret/refresh token)", "outcome": "preserve", "status": "in_progress", "next_action": "settings come across with records export"},
-    {"capability": "Telegram bot (notifications, webhook)", "source": "telegram-integration.js", "outcome": "preserve; webhook moves to public route with secret-token verification", "status": "in_progress", "next_action": "re-register webhook after publish"},
-    {"capability": "email OTP via SMTP (nodemailer)", "source": "otp-service.js", "outcome": "replaced by Lovable Cloud auth emails", "status": "in_progress", "next_action": "none"},
-    {"capability": "public endpoints: share links, video stream", "source": "share.routes.js, video-stream.routes.js", "outcome": "preserve", "status": "in_progress", "next_action": "implement"},
-    {"capability": "schedules: daily db-backup 01:00, notifications 15:00, reminder scheduler every 15m", "source": "vercel.json, instrumentation.js", "outcome": "pg_cron calling public cron route with CRON_SECRET", "status": "in_progress", "next_action": "schedule after publish URL known"},
-    {"capability": "secrets: VAULT_KEY_SALT, CRON_SECRET, API_KEY", "source": "env", "outcome": "request through secure form", "status": "pending", "next_action": "VAULT_KEY_SALT must match original to decrypt vault"},
-    {"capability": "secrets: DATABASE_URL, AUTH_SECRET", "source": "env", "outcome": "not needed (replaced by Lovable Cloud)", "status": "verified", "next_action": "none"},
-    {"capability": "cutover", "source": "-", "outcome": "repoint Telegram webhook and external cron to new URL", "status": "pending", "next_action": "after publish"},
-    {"capability": "verification", "source": "-", "outcome": "build, routes, CRUD flow, auth flow", "status": "pending", "next_action": "after build"}
+    {"capability": "code: pages and UI", "source": "app/**", "outcome": "53 pages + 19 legacy redirects on TanStack routes at the original URLs; original components reused through Next compatibility adapters", "status": "verified", "next_action": "none"},
+    {"capability": "code: API dispatcher (~24 route groups)", "source": "app/api/**", "outcome": "/api/* (signed-in members) and /api/public/* (share links, Telegram, schedules) server routes reusing original controllers", "status": "verified", "next_action": "none"},
+    {"capability": "schema (39 tables)", "source": "app/shared/models", "outcome": "Lovable Cloud Postgres with RLS for workspace members", "status": "verified", "next_action": "none"},
+    {"capability": "records", "source": "Neon/Postgres (DATABASE_URL)", "outcome": "migrate", "status": "pending", "next_action": "user exports each table to CSV/JSON; import in dependency order and reset id sequences"},
+    {"capability": "auth identities", "source": "users table", "outcome": "Lovable Cloud auth; profiles keep original ids; verified email links to the imported profile and restores its role", "status": "pending", "next_action": "needs users export (id, name, email, username, role, status); linking verified with a test imported user"},
+    {"capability": "authorization", "source": "users.role", "outcome": "user_roles table; accounts without a role wait for admin approval; first verified account becomes admin when no admin exists", "status": "verified", "next_action": "none"},
+    {"capability": "uploaded file bytes", "source": "storage/uploads + Google Drive", "outcome": "Drive preserved; non-Drive uploads go to private Cloud storage served at /uploads/<name>", "status": "pending", "next_action": "old locally stored files must be supplied to copy over (Drive files stay where they are)"},
+    {"capability": "Google Drive integration", "source": "settings rows", "outcome": "preserved; settings come across with the records export", "status": "pending", "next_action": "verify after settings are imported"},
+    {"capability": "Telegram bot", "source": "telegram-integration.js", "outcome": "preserved; webhook at /api/public/telegram/webhook with secret-token check", "status": "pending", "next_action": "re-register webhook from Settings after publish"},
+    {"capability": "email OTP via SMTP", "source": "otp-service.js", "outcome": "replaced by Lovable Cloud auth emails", "status": "verified", "next_action": "none"},
+    {"capability": "public endpoints: share links, video stream", "source": "share.routes.js", "outcome": "preserved under /api/public", "status": "verified", "next_action": "none"},
+    {"capability": "course PDF export", "source": "server headless Chrome", "outcome": "server returns the book HTML; browser compiles the PDF", "status": "in_progress", "next_action": "visual check with real course content"},
+    {"capability": "schedules", "source": "vercel.json", "outcome": "managed daily schedules: notifications 15:00 UTC, backup 01:00 UTC", "status": "verified", "next_action": "optional: more frequent reminders"},
+    {"capability": "secret: VAULT_KEY_SALT", "source": "env", "outcome": "requested through secure form", "status": "pending", "next_action": "must match original value to open existing vault entries"},
+    {"capability": "secrets: DATABASE_URL, AUTH_SECRET, SMTP", "source": "env", "outcome": "not needed (replaced by Lovable Cloud)", "status": "verified", "next_action": "none"},
+    {"capability": "cutover", "source": "-", "outcome": "publish, re-register Telegram webhook, stop old deployment", "status": "pending", "next_action": "after publish"},
+    {"capability": "verification", "source": "-", "outcome": "build OK; all main pages load signed in; task create/read/update/delete; access rules; upload+serve; share link; imported-user linking", "status": "verified", "next_action": "re-check with real data after import"}
   ]
 }
